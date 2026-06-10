@@ -59,6 +59,15 @@ _Integrantes incorporados
 _Primeros commits realizados
 -Edicion del Readme para iniciar proyecto
 
+Gaston Emanuel vera Sube la actualizacion del codigo lisp, habiendo desarrollado ya las funciones
+Transicion y timer. desarrollara tambien el requerimiento nro 3 donde hemos decidido en grupo integrar 
+al nucleo de la aplicaion  local-time como gestor de paquetes quicklisp.
+ Guido  hace los requerimientos 4 y 5 con emily
+Nahuel soto hace requerimeiento 6 
+Enzo Romero trabaja sobre el codigo comparativo en scala 
+Emyli creara y trabajara sobre el soporte en video del trabajo 
+
+
 En Proceso
 _Desarrollo de la Fase 1
 _Integración de librerías (Fase 2)
