@@ -1,0 +1,18 @@
+1) Al querer devolver la lista del estado y a lo que se quiere cambiar, ocurrio un error: no se creaba la lista y salia con un error.
+Problema: (defun transicion (c1 c2) (let ((r 'en-rojo) (y 'en-amarillo) (v 'en-verde)) 
+								(cond 
+								((eq c1 r) (list (c1 (format nil "cambiar a ~A" c2))))
+								((eq c1 y) (list (c1 (format nil "cambiar a ~A" c2))))
+								((eq c1 v) (list (c1 (format nil "cambiar a ~A" c2))))
+								))); al poner (c1 lisp interpreta como que c1 es una funcion, y al no serlo, se rompe.
+
+2) Al querer unir la funcion timer con transicion, saltaba error debido a un cambio en el nombre de las variables pasada por parametro de transicion.
+Problema: (defun transicion (color-actual cambiar-a) (let ((r 'en-rojo) (y 'en-amarillo) (g 'en-verde)) 
+								(cond 
+								((and (eq color-actual r) (eq cambiar-a 'verde)) (list c1 (format nil "cambiar a ~A" c2)))
+								((and (eq color-actual y) (eq cambiar-a 'rojo)) (list c1 (format nil "cambiar a ~A" c2)))
+								((and (eq color-actual g) (eq cambiar-a 'amarillo)) (list c1 (format nil "cambiar a ~A" c2)))
+								(t "Estado invalido")
+								)))
+
+

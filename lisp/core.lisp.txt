@@ -1,0 +1,16 @@
+Requerimiento 1:
+(defun transicion (color-actual cambiar-a) (let ((r 'en-rojo) (y 'en-amarillo) (g 'en-verde))
+								(cond 
+								((and (eq color-actual r) (eq cambiar-a 'verde)) (list color-actual (format nil "cambiar a ~A" cambiar-a)));Uso un Cond para abarcar los 3 casos de cambio de color del semaforo
+								((and (eq color-actual y) (eq cambiar-a 'rojo)) (list color-actual (format nil "cambiar a ~A" cambiar-a)))
+								((and (eq color-actual g) (eq cambiar-a 'amarillo)) (list color-actual (format nil "cambiar a ~A" cambiar-a)))
+								(t "Estado invalido")
+								)))
+Requerimiento 2:
+(defun timer (time) (let ((t-color (mod time 216)))
+							(cond 
+							((< t-color 90) 'rojo); De 0 a 89, rojo
+							((< t-color 96) 'amarillo); De 90 a 95, amarillo
+							(t 'verde); De 96 a 215, verde
+							)))
+
