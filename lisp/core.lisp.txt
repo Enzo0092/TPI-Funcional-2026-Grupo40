@@ -20,6 +20,22 @@ Requerimiento 1:
 				)))
 
 
+Requerimiento 3:
+(defun transicion (color-actual cambiar-a) (let ((r 'en-rojo) (y 'en-amarillo) (g 'en-verde)) 
+						(cond 
+						((and (eq color-actual r) (eq cambiar-a 'en-verde)) (list color-actual cambiar-a));Uso cond para abarcar los 3 casos de cambio de color del semaforo
+						((and (eq color-actual y) (eq cambiar-a 'en-rojo)) (list color-actual cambiar-a))
+						((and (eq color-actual g) (eq cambiar-a 'en-amarillo)) (list color-actual cambiar-a)))));Utilizo el requerimiento 1 para hacer este requerimiento
+
+(defun timer (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (transicion 'en-rojo 'en-verde)) 
+			((< t-color 96) (transicion 'en-amarillo 'en-rojo)) (t (transicion 'en-verde 'en-amarillo)))));Tambien, utilizo el requerimiento 2
+
+(defun logging (tiempo) (let ((color-anterior (car (timer tiempo))) (color-actual (cadr (timer tiempo))));Una vez que recibe la lista, guarda el CAR y
+el CADR de la lista y arma ya el resultado que se espera
+(format nil "Tiempo ~D: la luz cambio de ~A a ~A" tiempo color-anterior color-actual)))
+
+
+
 ;Requerimiento 4:
 ;4a. Función duracion-ciclo:
 ;; ========================================================
@@ -46,6 +62,8 @@ Requerimiento 1:
     ((> duracion-ciclo 150) "El ciclo es muy largo")
     (T "El ciclo es perfecto")
 ))
+
+
 
 ;Requerimiento 5:
 

@@ -23,3 +23,17 @@ Problema: (defun transicion (color-actual cambiar-a) (let ((r 'en-rojo) (y 'en-a
   		(defun ciclos-por-tiempo (minutos)
           (floor (/ (* minutos 60) (duracion-ciclo 90 6 120)))
          )
+
+4) Durante el desarrollo del requerimiento 3, note que no funcionaba debido a que habia puesto un parentesis de mas, haciendo que una version anterior del resultado,
+no devuelva lo esperado:
+
+(defun logging (tiempo) (let ((color-anterior (car (timer tiempo))) (color-actual (cadr (timer tiempo)))) 
+(cond ((and (eq color-anterior 'en-rojo) (eq color-actual "cambiar a verde")) 
+(list (format nil "Tiempo ~D: la luz cambio de ~A a ~A" tiempo color-anterior color-actual))));Aca puse un parentesis de mas, haciendo que el cond termine antes de tiempo
+((and (eq color-anterior 'en-amarillo) (eq color-actual "cambiar a rojo")) 
+(list (format nil "Tiempo ~D: la luz cambio de ~A a ~A" tiempo color-anterior color-actual))));lo mismo aca 
+(t (list (format nil "Tiempo ~D: la luz cambio de ~A a ~A" tiempo color-anterior color-actual))))))
+
+La funcion fue sobreescrita debido a que, como las variables del let ya recibian listas con valores con 2 estados diferentes sin acciones (como "cambiar a rojo"),
+me di cuenta que podia simplemente imprimir directamente el resultado ya que las funciones: timer y transicion (en una version donde timer llama a transicion enviandole valores)
+nunca iba a dar un resultado erroneo.
