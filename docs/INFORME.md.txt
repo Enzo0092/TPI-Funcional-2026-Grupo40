@@ -15,4 +15,11 @@ Problema: (defun transicion (color-actual cambiar-a) (let ((r 'en-rojo) (y 'en-a
 								(t "Estado invalido")
 								)))
 
-
+3) Durante el desarrollo del Requerimiento 5, notamos que la función devolvía dos valores separados (ej: 3 y 0.6111).
+ Al investigar comprendimos que se trata de la característica de múltiples valores de retorno de Lisp, donde floor 
+ devuelve tanto la parte entera como el resto. Decidimos mantenerlo funcionalmente puro, ya que al componer esta función,
+  Lisp automáticamente toma solo el valor principal (el cociente) sin necesidad de usar variables para limpiarlo. De igual 
+  manera hicimos otra version en la que no devuelve los valores separados.
+  		(defun ciclos-por-tiempo (minutos)
+          (floor (/ (* minutos 60) (duracion-ciclo 90 6 120)))
+         )

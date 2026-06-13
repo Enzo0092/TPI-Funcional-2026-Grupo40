@@ -10,7 +10,7 @@ Requerimiento 1:
 
 
 
-Requerimiento 2:
+;Requerimiento 2:
 (defun timer (time) 
 (let ((t-color (mod time 216)))
 	  (cond 
@@ -20,24 +20,12 @@ Requerimiento 2:
 				)))
 
 
-Requerimiento 4:
-4a. Función duracion-ciclo:
-;; ========================================================
-;; FUNCIÓN: duracion-ciclo
-;; NATURALEZA: Pura (Debido al tiempo de los cambios, calcula los ciclos matematicamente)
-;; ESTRATEGIA: Expresion Aritmética
-;; IMPACTO: No destructiva
-;; ========================================================
+;Requerimiento 4:
+;4a. Función duracion-ciclo:
 (defun duracion-ciclo (t-rojo t-amarillo t-verde)
   (+ t-rojo t-amarillo t-verde))
 
-4b. Función recomendacion-ciclo:
-;; ========================================================
-;; FUNCIÓN: recomendacion-ciclo
-;; NATURALEZA: Pura (En base a la duración del ciclo, calcula y evalua el ciclo sin efectos secundarios)
-;; ESTRATEGIA: Composición Condicional y evaluación de predicados
-;; IMPACTO: No destructiva
-;; ========================================================
+;4b. Función recomendacion-ciclo:
 (defun recomendacion-ciclo (duracion-ciclo)
 (cond
     ((< duracion-ciclo 35) "El ciclo es muy corto")
@@ -45,7 +33,17 @@ Requerimiento 4:
     (T "El ciclo es perfecto")
 ))
 
+;Requerimiento 5:
 
+;opcion 1 sin sacar el resto
+(defun ciclos-por-tiempo (minutos)
+  (floor (/ (* minutos 60) (duracion-ciclo 90 6 120)))
+)
+
+;opcion 2 sacando el resto
+(defun ciclos-por-tiempo (minutos)
+  (nth-value 0 (floor (/ (* minutos 60) (duracion-ciclo 90 6 120))))
+)
 
 
 
