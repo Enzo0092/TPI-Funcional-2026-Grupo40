@@ -22,10 +22,22 @@ Requerimiento 2:
 
 Requerimiento 4:
 4a. Función duracion-ciclo:
+;; ========================================================
+;; FUNCIÓN: duracion-ciclo
+;; NATURALEZA: Pura (Debido al tiempo de los cambios, calcula los ciclos matematicamente)
+;; ESTRATEGIA: Expresion Aritmética
+;; IMPACTO: No destructiva
+;; ========================================================
 (defun duracion-ciclo (t-rojo t-amarillo t-verde)
   (+ t-rojo t-amarillo t-verde))
 
 4b. Función recomendacion-ciclo:
+;; ========================================================
+;; FUNCIÓN: recomendacion-ciclo
+;; NATURALEZA: Pura (En base a la duración del ciclo, calcula y evalua el ciclo sin efectos secundarios)
+;; ESTRATEGIA: Composición Condicional y evaluación de predicados
+;; IMPACTO: No destructiva
+;; ========================================================
 (defun recomendacion-ciclo (duracion-ciclo)
 (cond
     ((< duracion-ciclo 35) "El ciclo es muy corto")
