@@ -1,4 +1,12 @@
 Requerimiento 1:
+
+;; ========================================================
+;; FUNCIÓN: transicion
+;; NATURALEZA: Pura (siempre devuelve el mismo resultado para los mismos parametros)
+;; ESTRATEGIA: Condicional
+;; IMPACTO: No destructiva
+;; ========================================================
+
 (defun transicion (color-actual cambiar-a) 
 	(let ((r 'en-rojo) (y 'en-amarillo) (g 'en-verde))
 	 (cond 
@@ -11,6 +19,14 @@ Requerimiento 1:
 
 
 ;Requerimiento 2:
+
+;; ========================================================
+;; FUNCIÓN: timer
+;; NATURALEZA: Pura (depende unicamente del parametro time)
+;; ESTRATEGIA: Expresion aritmetica y condicional
+;; IMPACTO: No destructiva
+;; ========================================================
+
 (defun timer (time) 
 (let ((t-color (mod time 216)))
 	  (cond 
@@ -21,14 +37,35 @@ Requerimiento 1:
 
 
 Requerimiento 3:
+;; ========================================================
+;; FUNCIÓN: transicion
+;; NATURALEZA: Pura (siempre devuelve el mismo resultado para los mismos parametros)
+;; ESTRATEGIA: Condicional (por su uso del cond)
+;; IMPACTO: No destructiva
+;; ========================================================
+
 (defun transicion (color-actual cambiar-a) (let ((r 'en-rojo) (y 'en-amarillo) (g 'en-verde)) 
 						(cond 
 						((and (eq color-actual r) (eq cambiar-a 'en-verde)) (list color-actual cambiar-a));Uso cond para abarcar los 3 casos de cambio de color del semaforo
 						((and (eq color-actual y) (eq cambiar-a 'en-rojo)) (list color-actual cambiar-a))
 						((and (eq color-actual g) (eq cambiar-a 'en-amarillo)) (list color-actual cambiar-a)))));Utilizo el requerimiento 1 para hacer este requerimiento
 
+;; ========================================================
+;; FUNCIÓN: timer
+;; NATURALEZA: Pura (depende unicamente del parametro time)
+;; ESTRATEGIA: Expresion aritmetica y condicional
+;; IMPACTO: No destructiva
+;; ========================================================
+
 (defun timer (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (transicion 'en-rojo 'en-verde)) 
 			((< t-color 96) (transicion 'en-amarillo 'en-rojo)) (t (transicion 'en-verde 'en-amarillo)))));Tambien, utilizo el requerimiento 2
+
+;; ========================================================
+;; FUNCIÓN: logging
+;; NATURALEZA: Pura (unicamente devuelve un string con format nil dependiendo de lo que reciba por parametro)
+;; ESTRATEGIA: Formateo de cadenas y composición de funciones
+;; IMPACTO: No destructiva
+;; ========================================================
 
 (defun logging (tiempo) (let ((color-anterior (car (timer tiempo))) (color-actual (cadr (timer tiempo))));Una vez que recibe la lista, guarda el CAR y
 el CADR de la lista y arma ya el resultado que se espera
