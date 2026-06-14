@@ -37,3 +37,5 @@ no devuelva lo esperado:
 La funcion fue sobreescrita debido a que, como las variables del let ya recibian listas con valores con 2 estados diferentes sin acciones (como "cambiar a rojo"),
 me di cuenta que podia simplemente imprimir directamente el resultado ya que las funciones: timer y transicion (en una version donde timer llama a transicion enviandole valores)
 nunca iba a dar un resultado erroneo.
+5) Durante el desarrollo de la fase 3 escribiendo las funciones de lisp a scala editamos el codigo de lisp ya hecho, cambiando la salida por default ya que en esa salida devolvemos 
+un string [(t "Estado invalido")] y no una lista lo que puede ocasionar inconsistencias en el desarrollo de las funciones en scala, el codigo corregido quedaria : [(t nil)]
