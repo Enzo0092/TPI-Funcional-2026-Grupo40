@@ -115,5 +115,37 @@ el CADR de la lista y arma ya el resultado que se espera
 )
 
 
+;Requerimiento 6
+;; ========================================================
+;; FUNCIÓN: distribución-por-hora
+;; NATURALEZA: Pura (depende solo de parámetros de tiempo)
+;; ESTRATEGIA: Composición aritmética y condicional
+;; IMPACTO: No destructiva
+;; ========================================================
 
+(defun distribucion-por-hora (t-rojo t-amarillo t-verde)
+  (let* ((ciclo (duracion-ciclo t-rojo t-amarillo t-verde))
+         (ciclos-completos (floor (/ 3600 ciclo)))
+         (tiempo-completo (* ciclos-completos ciclo))
+         (resto (- 3600 tiempo-completo))
+         ;; tiempos acumulados por color en ciclos completos
+         (rojo-base (* ciclos-completos t-rojo))
+         (amarillo-base (* ciclos-completos t-amarillo))
+         (verde-base (* ciclos-completos t-verde)))
+    ;; calculamos los tiempos finales sin mutar variables
+    (let ((rojo-final (cond
+                        ((<= resto t-rojo) (+ rojo-base resto))
+                        ((> resto t-rojo) (+ rojo-base t-rojo))
+                        (t rojo-base)))
+          (amarillo-final (cond
+                            ((<= resto t-rojo) amarillo-base)
+                            ((<= resto (+ t-rojo t-amarillo))
+                             (+ amarillo-base (- resto t-rojo)))
+                            (t (+ amarillo-base t-amarillo))))
+          (verde-final (cond
+                         ((<= resto (+ t-rojo t-amarillo)) verde-base)
+                         (t (+ verde-base (- resto (+ t-rojo t-amarillo)))))))
+      ;; devolvemos porcentajes
+      (mapcar (lambda (x) (* 100 (/ x 3600.0)))
+              (list rojo-final amarillo-final verde-final)))))
 

@@ -43,7 +43,7 @@ Lisp (con comentarios de tipo)
 │ └── config.json <-- Archivo de configuración (si eligieron cl-json
 en Fase 2)
 ├── comparativa/
-│ └── solucion.[ext] <-- Código en el lenguaje asignado (con comentarios
+│ └── solución.[ext] <-- Código en el lenguaje asignado (con comentarios
 de tipo según su sintaxis)
 ├── docs/
 │ ├── INFORME.pdf <-- Informe conceptual con las respuestas analíticas
@@ -57,15 +57,15 @@ ya realizado
 _ Repositorio creado
 _Integrantes incorporados
 _Primeros commits realizados
--Edicion del Readme para iniciar proyecto
+-Edición del Readme para iniciar proyecto
 
-Gaston Emanuel vera Sube la actualizacion del codigo lisp, habiendo desarrollado ya las funciones
-Transicion y timer. desarrollara tambien el requerimiento nro 3 donde hemos decidido en grupo integrar 
-al nucleo de la aplicaion  local-time como gestor de paquetes quicklisp.
- Guido  hace los requerimientos 4 y 5 con emily
-Nahuel soto hace requerimeiento 6 
-Enzo Romero trabaja sobre el codigo comparativo en scala 
-Emyli creara y trabajara sobre el soporte en video del trabajo 
+Gaston Emanuel vera Sube la actualización del código lisp, habiendo desarrollado ya las funciones
+Transición y timer. desarrollara tambien el requerimiento nro 3 donde hemos decidido en grupo integrar 
+al núcleo de la aplicación  local-time como gestor de paquetes quicklisp.
+ Guido hace los requerimientos 4 y 5 con Emily
+Nahuel Soto hace requerimiento 6 
+Enzo Romero trabaja sobre el código comparativo en scala 
+Emily creará y trabajará sobre el soporte en video del trabajo 
 
 
 En Proceso

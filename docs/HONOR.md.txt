@@ -1,7 +1,7 @@
 # Código de Honor y Declaración de Autoría
 
 Cada integrante debe completar individualmente su sección.
-Integrante :Enzo Romero - Usuario GitHub:Enzo0092
+Integrante :Enzo Romero - Usuario GitHub: Enzo0092
 1.Codigo en Common Lisp (Fase 1 y 2 )
 ● [] Desarrollo 100% Humano: El código fue diseñado, escrito y depurado puramente por mí/el
 grupo sin intervención de IA.
@@ -15,7 +15,7 @@ solución de forma autónoma.
 ● [X] Asistencia de IA: Utilicé la IA para traducir la sintaxis de Lisp al nuevo lenguaje o entender los
 errores del compilador ajeno.
 ● [ ] Generación Completa por IA: La IA realizó la traducción automática de las funciones
-transicion y timer.
+transición y timer.
 3. Redacción del Informe y Respuestas Teóricas
 ● [X] Autoría Propia: Las explicaciones de los conceptos de los lenguajes y el análisis comparativo
 reflejan nuestras propias conclusiones conceptuales.
@@ -27,7 +27,7 @@ que las marcas anteriores reflejan fielmente mi participación y la naturaleza d
 este trabajo práctico. Entiendo que la cátedra cruzará esta declaración con la correcta
 clasificación en comentarios del código y con mi desempeño en la defensa oral/video.
 
-Integrante :Gaston Vera - Usurio GitHub:XxGastuxX
+Integrante :Gaston Vera - Usuario GitHub: XxGastuxX
 1.Codigo en Common Lisp (Fase 1 y 2 )
 ● [] Desarrollo 100% Humano: El código fue diseñado, escrito y depurado puramente por mí/el
 grupo sin intervención de IA.
@@ -41,7 +41,7 @@ solución de forma autónoma.
 ● [X] Asistencia de IA: Utilicé la IA para traducir la sintaxis de Lisp al nuevo lenguaje o entender los
 errores del compilador ajeno.
 ● [ ] Generación Completa por IA: La IA realizó la traducción automática de las funciones
-transicion y timer.
+transición y timer.
 3. Redacción del Informe y Respuestas Teóricas
 ● [X] Autoría Propia: Las explicaciones de los conceptos de los lenguajes y el análisis comparativo
 reflejan nuestras propias conclusiones conceptuales.
@@ -53,7 +53,7 @@ que las marcas anteriores reflejan fielmente mi participación y la naturaleza d
 este trabajo práctico integrador. Entiendo que la cátedra cruzará esta declaración con la correcta
 clasificación en comentarios del código y con mi desempeño en la defensa oral/video.
 
-Integrante : Nahuel Federico Soto - Usurio GitHub:NahuelFS9
+Integrante : Nahuel Federico Soto - Usuario GitHub: NahuelFS9
 1.Codigo en Common Lisp (Fase 1 y 2 )
 ● [] Desarrollo 100% Humano: El código fue diseñado, escrito y depurado puramente por mí/el
 grupo sin intervención de IA.
@@ -67,7 +67,7 @@ solución de forma autónoma.
 ● [X] Asistencia de IA: Utilicé la IA para traducir la sintaxis de Lisp al nuevo lenguaje o entender los
 errores del compilador ajeno.
 ● [ ] Generación Completa por IA: La IA realizó la traducción automática de las funciones
-transicion y timer.
+transición y timer.
 3. Redacción del Informe y Respuestas Teóricas
 ● [X] Autoría Propia: Las explicaciones de los conceptos de los lenguajes y el análisis comparativo
 reflejan nuestras propias conclusiones conceptuales.
@@ -93,7 +93,7 @@ solución de forma autónoma.
 ● [X] Asistencia de IA: Utilicé la IA para traducir la sintaxis de Lisp al nuevo lenguaje o entender los
 errores del compilador ajeno.
 ● [ ] Generación Completa por IA: La IA realizó la traducción automática de las funciones
-transicion y timer.
+transición y timer.
 3. Redacción del Informe y Respuestas Teóricas
 ● [X] Autoría Propia: Las explicaciones de los conceptos de los lenguajes y el análisis comparativo
 reflejan nuestras propias conclusiones conceptuales.
@@ -120,7 +120,7 @@ solución de forma autónoma.
 ● [X] Asistencia de IA: Utilicé la IA para traducir la sintaxis de Lisp al nuevo lenguaje o entender los
 errores del compilador ajeno.
 ● [ ] Generación Completa por IA: La IA realizó la traducción automática de las funciones
-transicion y timer.
+transición y timer.
 3. Redacción del Informe y Respuestas Teóricas
 ● [X] Autoría Propia: Las explicaciones de los conceptos de los lenguajes y el análisis comparativo
 reflejan nuestras propias conclusiones conceptuales.
