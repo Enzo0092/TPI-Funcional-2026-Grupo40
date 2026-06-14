@@ -1,0 +1,39 @@
+object Semaforo {
+
+  // ========================================================
+  // FUNCIÓN: transicion
+  // NATURALEZA: Pura (Siempre devuelve el mismo resultado
+  // para los mismos parámetros)
+  // ESTRATEGIA: Condicional (Pattern Matching mediante match)
+  // IMPACTO: No destructiva
+  // ========================================================
+
+  def transicion(Color-Actual:String , Cambiar-A:String ): List[String] = 
+	(Color-Actual, Cambiar-A) match{
+	case("en-rojo", "en-verde")=>
+	List(ColorActual, Cambiar-A)
+	case("en-amarillo", "en-rojo")=>
+	List(Color-Actual, Cambiar-A)
+	case("en-verde", "en-amarillo")=>
+	List(Color-Actual, Cambiar-A)
+	case _ =>Nil
+{
+  // ========================================================
+  // FUNCIÓN: timer
+  // NATURALEZA: Pura (Depende únicamente del parámetro time)
+  // ESTRATEGIA: Condicional y Expresión Aritmética
+  // IMPACTO: No destructiva
+  // ========================================================
+
+def timer(time:Int): String = {
+
+  val tColor = time % 216
+
+  if (tColor < 90)
+    "rojo"
+  else if (tColor < 96)
+    "amarillo"
+  else
+    "verde"
+}
+

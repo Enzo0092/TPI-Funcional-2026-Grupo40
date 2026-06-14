@@ -13,7 +13,7 @@ Requerimiento 1:
 		  ((and (eq color-actual r) (eq cambiar-a 'verde)) (list color-actual (format nil "cambiar a ~A" cambiar-a)));Uso un Cond para abarcar los 3 casos de cambio de color del semaforo
 		  ((and (eq color-actual y) (eq cambiar-a 'rojo)) (list color-actual (format nil "cambiar a ~A" cambiar-a)))
 		  ((and (eq color-actual g) (eq cambiar-a 'amarillo)) (list color-actual (format nil "cambiar a ~A" cambiar-a)))
-		  (t "Estado invalido")
+		  (t Nil)
 					)))
 
 
