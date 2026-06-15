@@ -40,6 +40,10 @@ nunca iba a dar un resultado erroneo.
 5) Durante el desarrollo de la fase 3 escribiendo las funciones de lisp a scala editamos el codigo de lisp ya hecho, cambiando la salida por default ya que en esa salida devolvemos 
 un string [(t "Estado invalido")] y no una lista lo que puede ocasionar inconsistencias en el desarrollo de las funciones en scala, el codigo corregido quedaria : [(t nil)]
 
+6) Durante el desarrollo de la fase 2, al no conocer del todo como funcionaba local-time ni como pasarle valores para que los transforme en una fecha, habia puesto (local-time:120129) pero no funciono. Para que dicha funcion
+convierta cualquier valor a una fecha se debe escribir (local-time:unix-to-timestamp tiempo-unix), de esta forma devolverá: (local-time:unix-to-timestamp 1747405800) -> @2025-05-16T14:30:00.000000Z; pero si
+queremos que sea un string legible se debe escribir: (local-time:format-timestring nil (local-time:unix-to-timestamp tiempo-unix)), si utilizamos los valores anteriores: 
+(local-time:format-timestring nil (local-time:unix-to-timestamp 1747405800)) -> "2025-05-16T14:30:00.000000Z".
 
 Respuestas teoricas de Scala
 ○ 1. Scala combina la Programación Orientada a Objetos (POO) con la Funcional. ¿Cómo
