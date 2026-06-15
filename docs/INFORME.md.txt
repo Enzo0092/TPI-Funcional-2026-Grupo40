@@ -39,3 +39,27 @@ me di cuenta que podia simplemente imprimir directamente el resultado ya que las
 nunca iba a dar un resultado erroneo.
 5) Durante el desarrollo de la fase 3 escribiendo las funciones de lisp a scala editamos el codigo de lisp ya hecho, cambiando la salida por default ya que en esa salida devolvemos 
 un string [(t "Estado invalido")] y no una lista lo que puede ocasionar inconsistencias en el desarrollo de las funciones en scala, el codigo corregido quedaria : [(t nil)]
+
+
+Respuestas teoricas de Scala
+○ 1. Scala combina la Programación Orientada a Objetos (POO) con la Funcional. ¿Cómo
+estructuraron el semáforo? ¿Usaron una clase tradicional, un object (Singleton), o case
+classes? Justifiquen desde el diseño funcional.
+1)Respuesta:Estructuramos el semáforo utilizando un object llamado Semaforo, que agrupa las funciones transicion y timer. Elegimos object porque no necesitamos crear múltiples instancias del semáforo ni almacenar un estado interno modificable.
+Las funciones reciben sus parámetros, calculan un resultado y lo devuelven sin alterar variables globales ni modificar estructuras existentes.
+
+Desde el diseño funcional, esta decisión es adecuada porque transicion y timer se comportan como funciones puras: para los mismos valores de entrada siempre producen el mismo resultado. 
+Además, el uso de val dentro de timer evita mutabilidad, y el uso de match permite expresar la lógica condicional de forma declarativa, similar al cond utilizado en Common Lisp.
+
+No utilizamos una clase tradicional porque no se requiere modelar objetos con identidad o estado propio. Tampoco usamos case classes porque el requerimiento solo solicita reimplementar comportamiento funcional, no representar datos complejos del semáforo.
+object = módulo/contenedor de funciones puras
+class = objetos con estado
+case class = modelar datos
+2)Comparen la manipulación de listas en Scala (métodos como .map o .filter) contra
+las funciones de orden superior de Common Lisp. ¿Cuál resulta más legible y por qué?En Scala la manipulación de listas se realiza mediante métodos asociados a la propia colección, como .map y .filter. Por ejemplo, una lista puede transformarse escribiendo lista.map(x => ...) lo que permite leer la operación de izquierda a derecha: primero la colección y luego la transformación aplicada a cada elemento.
+
+En Common Lisp se utilizan funciones de orden superior como mapcar, donde la función se pasa como argumento junto con la lista. Conceptualmente ambas herramientas cumplen un rol similar: aplicar una función a los elementos de una colección sin modificar la lista original. En ambos casos se favorece un estilo funcional y no destructivo.
+
+Consideramos que Scala resulta más legible porque la operación aparece como método de la lista y la expresión lambda es más compacta. Por ejemplo, lista.map(x => x * 2) resulta más directa visualmente que (mapcar (lambda (x) (* x 2)) lista). Sin embargo, Common Lisp mantiene una sintaxis más uniforme, ya que todo se expresa como listas y llamadas a funciones.
+
+En conclusión, ambas formas son funcionalmente equivalentes, pero para este trabajo consideramos más legible la sintaxis de Scala en operaciones simples sobre listas, mientras que Common Lisp resulta más consistente desde el punto de vista del paradigma funcional puro.

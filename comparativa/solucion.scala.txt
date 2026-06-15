@@ -1,3 +1,10 @@
+// ========================================================
+// COMPONENTE: Semaforo
+// TIPO: Object / Singleton
+// DESCRIPCIÓN: Agrupa las funciones puras transicion y timer
+// relacionadas con el comportamiento del semáforo.
+// ========================================================
+
 object Semaforo {
 
   // ========================================================
@@ -8,16 +15,22 @@ object Semaforo {
   // IMPACTO: No destructiva
   // ========================================================
 
-  def transicion(Color-Actual:String , Cambiar-A:String ): List[String] = 
-	(Color-Actual, Cambiar-A) match{
-	case("en-rojo", "en-verde")=>
-	List(ColorActual, Cambiar-A)
-	case("en-amarillo", "en-rojo")=>
-	List(Color-Actual, Cambiar-A)
-	case("en-verde", "en-amarillo")=>
-	List(Color-Actual, Cambiar-A)
-	case _ =>Nil
-{
+  def transicion(colorActual: String, cambiarA: String): List[String] = {
+    (colorActual, cambiarA) match {
+      case ("en-rojo", "en-verde") =>
+        List(colorActual, cambiarA)
+
+      case ("en-amarillo", "en-rojo") =>
+        List(colorActual, cambiarA)
+
+      case ("en-verde", "en-amarillo") =>
+        List(colorActual, cambiarA)
+
+      case _ =>
+        Nil
+    }
+  }
+
   // ========================================================
   // FUNCIÓN: timer
   // NATURALEZA: Pura (Depende únicamente del parámetro time)
@@ -25,15 +38,13 @@ object Semaforo {
   // IMPACTO: No destructiva
   // ========================================================
 
-def timer(time:Int): String = {
+  def timer(time: Int): String = {
+    val tColor = time % 216
 
-  val tColor = time % 216
-
-  if (tColor < 90)
-    "rojo"
-  else if (tColor < 96)
-    "amarillo"
-  else
-    "verde"
+    tColor match {
+      case x if x < 90 => "rojo"
+      case x if x < 96 => "amarillo"
+      case _ => "verde"
+    }
+  }
 }
-
