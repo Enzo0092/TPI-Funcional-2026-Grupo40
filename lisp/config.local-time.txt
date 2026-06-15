@@ -11,3 +11,61 @@
 
 (defun logging (tiempo) (let ((fecha (local-time:format-timestring nil (local-time:unix-to-timestamp tiempo))) (color-anterior (car (timer tiempo))) (color-actual (cadr (timer tiempo))));Una vez que recibe la lista, guarda el CAR y el CADR de la lista y arma ya el resultado que se espera
 (format nil "~A: la luz cambio de ~A a ~A" fecha color-anterior color-actual)));En esta funcion, guardo lo que devuelve local-time en una variable local, en este caso lo va a guardar entre comillas ("1970-01-15T06:15:31.000000Z")
+
+;===========
+;Iteración 2
+;===========
+
+;Extensión 1: Intermitencia de Seguridad
+
+(defun transicion (color-actual cambiar-a) 
+	(let ((r 'en-rojo) (y 'en-amarillo) (g 'en-verde))
+	 (cond 
+	 	;Transición: de rojo a rojo intermitente, y de rojo intermitente a verde  
+		((and (eq color-actual r) (eq cambiar-a 'rojo-intermitente))(list color-actual (format nil "cambiar a ~A" cambiar-a)))
+		((and(eq color-actual 'rojo-intermitente)(eq cambiar-a g))(list color-actual (format nil "cambiar a ~A" cambiar-a)))
+        ;Transicion: de verde a verde intermitente, y de verde intermitente a amarillo
+		((and (eq color-actual g) (eq cambiar-a 'verde-intermitente))(list color-actual (format nil "cambiar a ~A" cambiar-a)))
+		((and (eq color-actual 'verde-intermitente) (eq cambiar-a y))(list color-actual (format nil "cambiar a ~A" cambiar-a)))
+		;Transicion:de amarillo a amarillo intermitente, y de amarillo intermitente a rojo
+		((and (eq color-actual y) (eq cambiar-a 'amarillo-intermitente))(list color-actual (format nil "cambiar a ~A" cambiar-a)))
+		((and (eq color-actual 'amarillo-intermitente)(eq cambiar-a r))(list color-actual (format nil "cambiar a ~A" cambiar-a)))
+		;Caso por defecto ante una transicion inválida o fuera de secuencia
+		(t NIL))))
+
+
+(defun timer (time) 
+	(let ((t-color (mod time 225))) ;el ciclo total ahora dura 225 segundos
+		(cond 
+			((< t-color 90) (transicion 'en-rojo 'rojo-intermitente)) ; de 0 a 89sg: Cambia a rojo intermitente
+			((< t-color 93) (transicion 'rojo-intermitente 'en-verde)) ;de 90 a 92sg: Cambia a verde
+			((< t-color 213) (transicion 'en-verde 'verde-intermitente)) ;de 93 a 212sg: Cambia a verde intermitente
+			((< t-color 216) (transicion 'verde-intermitente 'en-amarillo)) ;de 213 a 215: Cambia a amarillo
+			((< t-color 222) (transicion 'en-amarillo 'amarillo-intermitente)) ;de 216 a 221: Cambia a amarillo intermitente
+			(t (transicion 'amarillo-intermitente 'en-rojo))))) ;de 222 a 224: Cambia a Rojo
+
+(defun logging (tiempo)
+	(let ((color-anterior (car (timer tiempo)))
+			(color-actual (cadr (timer tiempo))))
+	(format nil "Tiempo ~D: la luz ha cambiado de ~A a ~A" tiempo color-anterior color-actual)
+))
+
+(defun duracion-ciclo (t-rojo t-amarillo t-verde)
+;Se le suma 3 segundos de intermitencia por cada una de las 3 fases (en total 9 segundos extras)
+(+ t-rojo t-amarillo t-verde 3 3 3))
+
+(defun recomendacion-ciclo (duracion-ciclo)
+	(cond
+		((< duracion-ciclo 35) "El ciclo es muy corto")
+		((> duracion-ciclo 150) "El ciclo es muy largo")
+		(T "El ciclo es perfecto")
+	)
+
+)
+
+(defun ciclos-por-tiempo (minutos)
+;Como usamos la funcion duracion-ciclo pasándole los parámetros base (90 6 120)
+;La función internamente sumará la intermitencia dando 225
+	(floor (/(* minutos 60) (duracion-ciclo 90 6 120)))
+)
+

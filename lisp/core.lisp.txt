@@ -81,8 +81,9 @@ Requerimiento 3:
 ;; IMPACTO: No destructiva
 ;; ========================================================
 
-(defun duracion-ciclo (t-rojo t-amarillo t-verde)
-  (+ t-rojo t-amarillo t-verde))
+(defun duracion-ciclo (t-rojo t-verde t-amarillo)
+  ;Suma los tiempos de las tres fases para obtener el ciclo completo (rojo -> amarillo -> verde)
+  (+ t-rojo t-verde t-amarillo))
 
 ;4b. Función recomendacion-ciclo:
 ;; ========================================================
@@ -93,9 +94,13 @@ Requerimiento 3:
 ;; ========================================================
 
 (defun recomendacion-ciclo (duracion-ciclo)
-(cond
+ ;Evalúa los predicados de arriba hacia abajo y frena en la primera que sea verdadera.
+    (cond
+    ; 1. Compara si la duración es menor al límite psicológico de 35 segundos
     ((< duracion-ciclo 35) "El ciclo es muy corto")
+    ; 2. Si no es menor a 35, compara si supera el límite máximo de 150 segundos
     ((> duracion-ciclo 150) "El ciclo es muy largo")
+    ; Si llegó hasta acá, significa que el tiempo está en el rango óptimo (entre 35 y 150 segundos)
     (T "El ciclo es perfecto")
 ))
 
