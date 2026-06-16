@@ -31,8 +31,8 @@ Requerimiento 1:
 (let ((t-color (mod time 216)))
 	  (cond 
 			((< t-color 90) 'rojo); De 0 a 89, rojo
-			((< t-color 96) 'amarillo); De 90 a 95, amarillo
-			(t 'verde); De 96 a 215, verde
+			((< t-color 210) 'verde); De 90 a 209, verde
+			(t 'amarillo); De 210 a 215, amarillo
 				)))
 
 
@@ -44,11 +44,11 @@ Requerimiento 3:
 ;; IMPACTO: No destructiva
 ;; ========================================================
 
-(defun transicion (color-actual cambiar-a) (let ((r 'en-rojo) (y 'en-amarillo) (g 'en-verde)) 
+(defun transicion (color-actual cambiar-a) (let ((r 'rojo) (y 'amarillo) (g 'verde)) 
 						(cond 
-						((and (eq color-actual r) (eq cambiar-a 'en-verde)) (list color-actual cambiar-a));Uso cond para abarcar los 3 casos de cambio de color del semaforo
-						((and (eq color-actual y) (eq cambiar-a 'en-rojo)) (list color-actual cambiar-a))
-						((and (eq color-actual g) (eq cambiar-a 'en-amarillo)) (list color-actual cambiar-a)))));Utilizo el requerimiento 1 para hacer este requerimiento
+						((and (eq color-actual r) (eq cambiar-a 'verde)) (list color-actual cambiar-a));Uso cond para abarcar los 3 casos de cambio de color del semaforo
+						((and (eq color-actual y) (eq cambiar-a 'rojo)) (list color-actual cambiar-a))
+						((and (eq color-actual g) (eq cambiar-a 'amarillo)) (list color-actual cambiar-a)))));Utilizo el requerimiento 1 para hacer este requerimiento
 
 ;; ========================================================
 ;; FUNCIÓN: timer
@@ -57,8 +57,8 @@ Requerimiento 3:
 ;; IMPACTO: No destructiva
 ;; ========================================================
 
-(defun timer (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (transicion 'en-rojo 'en-verde)) 
-			((< t-color 96) (transicion 'en-amarillo 'en-rojo)) (t (transicion 'en-verde 'en-amarillo)))));Tambien, utilizo el requerimiento 2
+(defun timer (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (transicion 'rojo 'verde)) 
+			((< t-color 210) (transicion 'verde 'amarillo)) (t (transicion 'amarillo 'rojo)))));Tambien, utilizo el requerimiento 2
 
 ;; ========================================================
 ;; FUNCIÓN: logging
@@ -67,8 +67,7 @@ Requerimiento 3:
 ;; IMPACTO: No destructiva
 ;; ========================================================
 
-(defun logging (tiempo) (let ((color-anterior (car (timer tiempo))) (color-actual (cadr (timer tiempo))));Una vez que recibe la lista, guarda el CAR y
-el CADR de la lista y arma ya el resultado que se espera
+(defun logging (tiempo) (let ((color-anterior (car (timer tiempo))) (color-actual (cadr (timer tiempo))));Una vez que recibe la lista, guarda el CAR y el CADR de la lista y arma ya el resultado que se espera
 (format nil "Tiempo ~D: la luz cambio de ~A a ~A" tiempo color-anterior color-actual)))
 
 
@@ -82,8 +81,9 @@ el CADR de la lista y arma ya el resultado que se espera
 ;; IMPACTO: No destructiva
 ;; ========================================================
 
-(defun duracion-ciclo (t-rojo t-amarillo t-verde)
-  (+ t-rojo t-amarillo t-verde))
+(defun duracion-ciclo (t-rojo t-verde t-amarillo)
+  ;Suma los tiempos de las tres fases para obtener el ciclo completo (rojo -> verde -> amarillo )
+  (+ t-rojo t-verde t-amarillo))
 
 ;4b. Función recomendacion-ciclo:
 ;; ========================================================
@@ -94,9 +94,13 @@ el CADR de la lista y arma ya el resultado que se espera
 ;; ========================================================
 
 (defun recomendacion-ciclo (duracion-ciclo)
-(cond
+ ;Evalúa los predicados de arriba hacia abajo y frena en la primera que sea verdadera.
+    (cond
+    ; 1. Compara si la duración es menor al límite psicológico de 35 segundos
     ((< duracion-ciclo 35) "El ciclo es muy corto")
+    ; 2. Si no es menor a 35, compara si supera el límite máximo de 150 segundos
     ((> duracion-ciclo 150) "El ciclo es muy largo")
+    ; Si llegó hasta acá, significa que el tiempo está en el rango óptimo (entre 35 y 150 segundos)
     (T "El ciclo es perfecto")
 ))
 
