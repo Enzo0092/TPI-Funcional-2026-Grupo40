@@ -109,47 +109,80 @@ Requerimiento 3:
 ;Requerimiento 5:
 
 ;opcion 1 sin sacar el resto
+
+;; ========================================================
+;; FUNCIÓN: ciclos-por-tiempo
+;; NATURALEZA: Pura (Dado un tiempo en minutos, calcula de forma determinista los ciclos completos sin efectos secundarios)
+;; ESTRATEGIA: Composición Aritmética y Truncamiento
+;; IMPACTO: No destructiva (No modifica estructuras; devuelve un número entero nuevo)
+;; ========================================================
+
 (defun ciclos-por-tiempo (minutos)
+  ; 1. Convertimos los minutos recibidos por parámetro a segundos multiplicándolos por 60.
+  ; 2. Llamamos a 'duracion-ciclo' pasándole los tiempos puros de la Fase 1 (90, 6, 120), que suman 216s.
+  ; 3. Dividimos el tiempo total en segundos por la duración del ciclo básico.
+  ; 4. La función 'floor' trunca el resultado hacia abajo (descarta los decimales),
+  ;    asegurando que solo se devuelva la cantidad de ciclos COMPLETOS.
   (floor (/ (* minutos 60) (duracion-ciclo 90 6 120)))
 )
 
 ;opcion 2 sacando el resto
+
+;; ========================================================
+;; FUNCIÓN: ciclos-por-tiempo
+;; NATURALEZA: Pura (Calcula la cantidad de ciclos completos basándose únicamente en el parámetro de entrada)
+;; ESTRATEGIA: Composición Aritmética / Extracción de Valores Múltiples (nth-value)
+;; IMPACTO: No destructiva (Retorna un valor numérico atómico sin alterar el entorno)
+;; ========================================================
+
 (defun ciclos-por-tiempo (minutos)
+  ; 1. Convertimos los minutos de entrada a segundos (* minutos 60).
+  ; 2. Dividimos por la duración calculada del ciclo puro de Fase 1 (216 segundos).
+  ; 3. La función primitiva 'floor' realiza la división y genera dos salidas en paralelo: (cociente-entero resto-en-segundos).
+  ; 4. 'nth-value 0' interviene para capturar únicamente el valor de la posición cero (el cociente),
+  ;    descartando el residuo para cumplir estrictamente con la especificación de ciclos completos.
   (nth-value 0 (floor (/ (* minutos 60) (duracion-ciclo 90 6 120))))
 )
 
 
 ;Requerimiento 6
 ;; ========================================================
-;; FUNCIÓN: distribución-por-hora
-;; NATURALEZA: Pura (depende solo de parámetros de tiempo)
+;; FUNCIÓN: distribución-hora-n
+;; NATURALEZA: Pura
 ;; ESTRATEGIA: Composición aritmética y condicional
 ;; IMPACTO: No destructiva
 ;; ========================================================
 
-(defun distribucion-por-hora (t-rojo t-amarillo t-verde)
-  (let* ((ciclo (duracion-ciclo t-rojo t-amarillo t-verde))
-         (ciclos-completos (floor (/ 3600 ciclo)))
-         (tiempo-completo (* ciclos-completos ciclo))
-         (resto (- 3600 tiempo-completo))
-         ;; tiempos acumulados por color en ciclos completos
-         (rojo-base (* ciclos-completos t-rojo))
-         (amarillo-base (* ciclos-completos t-amarillo))
-         (verde-base (* ciclos-completos t-verde)))
-    ;; calculamos los tiempos finales sin mutar variables
-    (let ((rojo-final (cond
-                        ((<= resto t-rojo) (+ rojo-base resto))
-                        ((> resto t-rojo) (+ rojo-base t-rojo))
-                        (t rojo-base)))
-          (amarillo-final (cond
-                            ((<= resto t-rojo) amarillo-base)
-                            ((<= resto (+ t-rojo t-amarillo))
-                             (+ amarillo-base (- resto t-rojo)))
-                            (t (+ amarillo-base t-amarillo))))
-          (verde-final (cond
-                         ((<= resto (+ t-rojo t-amarillo)) verde-base)
-                         (t (+ verde-base (- resto (+ t-rojo t-amarillo)))))))
-      ;; devolvemos porcentajes
+(defun distribucion-hora-n (t-rojo t-amarillo t-verde n)
+  (let* ((ciclo (+ t-rojo t-amarillo t-verde))
+         (inicio (* (1- n) 3600))		;; segundo inicial de la hora N
+         (offset (mod inicio ciclo))		;; aca se determina en qué punto del ciclo arranca la hora 
+         (resto-inicial (- ciclo offset)))
+    ;; aca se calculan los segundos de la hora N
+    (let* ((primera (cond
+                      ((<= 3600 resto-inicial)
+                       ;; toda la hora entra en el ciclo actual
+                       (list (min 3600 t-rojo)
+                             (min (max 0 (- 3600 t-rojo)) t-amarillo)
+                             (max 0 (- 3600 (+ t-rojo t-amarillo)))))
+                      (t
+                       ;; aca se completa el ciclo en curso
+                       (list (min resto-inicial t-rojo)
+                             (min (max 0 (- resto-inicial t-rojo)) t-amarillo)
+                             (max 0 (- resto-inicial (+ t-rojo t-amarillo)))))))
+           (restante (- 3600 (reduce #'+ primera)))		;; estos son los segundos que quedan de la hora después de cerrar ese ciclo
+           (ciclos-completos (floor (/ restante ciclo)))
+           (tiempo-ciclos (* ciclos-completos ciclo))
+           (rojo-base (+ (first primera) (* ciclos-completos t-rojo)))
+           (amarillo-base (+ (second primera) (* ciclos-completos t-amarillo)))
+           (verde-base (+ (third primera) (* ciclos-completos t-verde)))
+           (sobrante (- restante tiempo-ciclos))
+           (final (list (min sobrante t-rojo)		;; aca se reparten los segundos sobrantes del último ciclo parcial
+                        (min (max 0 (- sobrante t-rojo)) t-amarillo)
+                        (max 0 (- sobrante (+ t-rojo t-amarillo))))))
+      ;; aca se devuelven los porcentajes
       (mapcar (lambda (x) (* 100 (/ x 3600.0)))
-              (list rojo-final amarillo-final verde-final)))))
-
+              (list (+ rojo-base (first final))
+                    (+ amarillo-base (second final))
+                    (+ verde-base (third final)))))))
+	;; los porcentajes de la primera, segunda y tercer hora varian y luego se repiten cadda tres horas.

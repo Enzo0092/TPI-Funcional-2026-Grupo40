@@ -45,6 +45,8 @@ convierta cualquier valor a una fecha se debe escribir (local-time:unix-to-times
 queremos que sea un string legible se debe escribir: (local-time:format-timestring nil (local-time:unix-to-timestamp tiempo-unix)), si utilizamos los valores anteriores: 
 (local-time:format-timestring nil (local-time:unix-to-timestamp 1747405800)) -> "2025-05-16T14:30:00.000000Z".
 
+7) Durante el desarrollo del requerimiento 6 se encontró el problema de que en una hora entraban 16 ciclos enteros mas 144 segundos, lo que equivale a 2 tercios de un ciclo, por lo cual la hora siguiente comenzaría con ese ultimo tercio del ultimo ciclo incompleto (72 segundos) y terminaría con el primer tercio de un nuevo ciclo (72 segundos) para luego comenzar la tercer hora con los últimos 2 tercios de ciclo del ultimo ciclo de la segunda hora y terminar la tercer hora al finalizar un ciclo completo. Cada 3 horas el inicio de la hora vuelve a coincidir con el inicio de un ciclo. Me di cuenta de esto luego de codificar la solucion para la primer hora y notar que habia un desfase entre 1 hora y los ciclos por lo cual el porcentaje de cada color no seria el mismo para la primer hora que para la segunda ni la tercera y se tuvo que modificar la solución teniendo en cuenta este nuevo ciclo para poder saber el porcentaje de cada color en una hora N.
+
 Respuestas teoricas de Scala
 ○ 1. Scala combina la Programación Orientada a Objetos (POO) con la Funcional. ¿Cómo
 estructuraron el semáforo? ¿Usaron una clase tradicional, un object (Singleton), o case
