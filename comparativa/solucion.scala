@@ -43,7 +43,7 @@ object Semaforo {
 
     tColor match {
       case x if x < 90 => "rojo"
-      case x if x < 96 => "verde"
+      case x if x < 210=> "verde"
       case _ => "amarillo"
     }
   }
