@@ -121,33 +121,42 @@ Requerimiento 3:
 
 ;Requerimiento 6
 ;; ========================================================
-;; FUNCIÓN: distribución-por-hora
-;; NATURALEZA: Pura (depende solo de parámetros de tiempo)
+;; FUNCIÓN: distribución-hora-n
+;; NATURALEZA: Pura
 ;; ESTRATEGIA: Composición aritmética y condicional
 ;; IMPACTO: No destructiva
 ;; ========================================================
 
-(defun distribucion-por-hora (t-rojo t-amarillo t-verde)
-  (let* ((ciclo (duracion-ciclo t-rojo t-amarillo t-verde))
-         (ciclos-completos (floor (/ 3600 ciclo)))
-         (tiempo-completo (* ciclos-completos ciclo))
-         (resto (- 3600 tiempo-completo)) 
-         (rojo-base (* ciclos-completos t-rojo)) 	;; tiempos acumulados por color en ciclos completos
-         (amarillo-base (* ciclos-completos t-amarillo))
-         (verde-base (* ciclos-completos t-verde)))
-    
-    (let ((rojo-final (cond 	   ;; aca se calculan los tiempos finales sin modificar variables
-                        ((<= resto t-rojo) (+ rojo-base resto))
-                        ((> resto t-rojo) (+ rojo-base t-rojo))
-                        (t rojo-base)))
-          (amarillo-final (cond
-                            ((<= resto t-rojo) amarillo-base)
-                            ((<= resto (+ t-rojo t-amarillo))
-                             (+ amarillo-base (- resto t-rojo)))
-                            (t (+ amarillo-base t-amarillo))))
-          (verde-final (cond
-                         ((<= resto (+ t-rojo t-amarillo)) verde-base)
-                         (t (+ verde-base (- resto (+ t-rojo t-amarillo))))))) 
-      (mapcar (lambda (x) (* 100 (/ x 3600.0))) 	;; aca se devuelven los porcentajes
-              (list rojo-final amarillo-final verde-final)))))
-
+(defun distribucion-hora-n (t-rojo t-amarillo t-verde n)
+  (let* ((ciclo (+ t-rojo t-amarillo t-verde))
+         (inicio (* (1- n) 3600))		;; segundo inicial de la hora N
+         (offset (mod inicio ciclo))		;; aca se determina en qué punto del ciclo arranca la hora 
+         (resto-inicial (- ciclo offset)))
+    ;; aca se calculan los segundos de la hora N
+    (let* ((primera (cond
+                      ((<= 3600 resto-inicial)
+                       ;; toda la hora entra en el ciclo actual
+                       (list (min 3600 t-rojo)
+                             (min (max 0 (- 3600 t-rojo)) t-amarillo)
+                             (max 0 (- 3600 (+ t-rojo t-amarillo)))))
+                      (t
+                       ;; aca se completa el ciclo en curso
+                       (list (min resto-inicial t-rojo)
+                             (min (max 0 (- resto-inicial t-rojo)) t-amarillo)
+                             (max 0 (- resto-inicial (+ t-rojo t-amarillo)))))))
+           (restante (- 3600 (reduce #'+ primera)))		;; estos son los segundos que quedan de la hora después de cerrar ese ciclo
+           (ciclos-completos (floor (/ restante ciclo)))
+           (tiempo-ciclos (* ciclos-completos ciclo))
+           (rojo-base (+ (first primera) (* ciclos-completos t-rojo)))
+           (amarillo-base (+ (second primera) (* ciclos-completos t-amarillo)))
+           (verde-base (+ (third primera) (* ciclos-completos t-verde)))
+           (sobrante (- restante tiempo-ciclos))
+           (final (list (min sobrante t-rojo)		;; aca se reparten los segundos sobrantes del último ciclo parcial
+                        (min (max 0 (- sobrante t-rojo)) t-amarillo)
+                        (max 0 (- sobrante (+ t-rojo t-amarillo))))))
+      ;; aca se devuelven los porcentajes
+      (mapcar (lambda (x) (* 100 (/ x 3600.0)))
+              (list (+ rojo-base (first final))
+                    (+ amarillo-base (second final))
+                    (+ verde-base (third final)))))))
+	;; los porcentajes de la primera, segunda y tercer hora varian y luego se repiten cadda tres horas.
