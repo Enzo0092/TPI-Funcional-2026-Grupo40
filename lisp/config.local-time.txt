@@ -13,10 +13,10 @@
 (format nil "~A: la luz cambio de ~A a ~A" fecha color-anterior color-actual)));En esta funcion, guardo lo que devuelve local-time en una variable local, en este caso lo va a guardar entre comillas ("1970-01-15T06:15:31.000000Z")
 
 ;===========
-;Iteración 2
+;Iteración 1
 ;===========
 
-;Extensión 1: Intermitencia de Seguridad
+;Intermitencia de Seguridad
 
 (defun transicion (color-actual cambiar-a) 
 	(let ((r 'en-rojo) (y 'en-amarillo) (g 'en-verde))
@@ -69,3 +69,27 @@
 	(floor (/(* minutos 60) (duracion-ciclo 90 6 120)))
 )
 
+;=============
+;Iteracion 2
+;=============
+
+;Persistencia de datos
+
+(defun informe (tiempo)
+ (with-open-file (stream "informe-ejecucion-semaforo.txt" :direction :output)
+   (format stream "Informe de Ejecución del Sistema Semafórico~%")
+   (format stream "=========================================~%")
+	
+(let ((fecha (local-time:format-timestring nil (local-time:unix-to-timestamp tiempo))) (color-anterior (car (timer tiempo))) (color-actual (cadr (timer tiempo))))
+	
+(format stream "~A: la luz cambio de ~A a ~A" fecha color-anterior color-actual))
+(format stream "~% --- Fin del Informe ---")))
+
+(defun transicion (color-actual cambiar-a) (let ((r 'rojo) (y 'amarillo) (g 'verde)) 
+						(cond 
+						((and (eq color-actual r) (eq cambiar-a 'verde)) (list color-actual cambiar-a))
+						((and (eq color-actual y) (eq cambiar-a 'rojo)) (list color-actual cambiar-a))
+						((and (eq color-actual g) (eq cambiar-a 'amarillo)) (list color-actual cambiar-a)))))
+
+(defun timer (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (transicion 'rojo 'verde)) 
+			((< t-color 210) (transicion 'verde 'amarillo)) (t (transicion 'amarillo 'rojo)))))
