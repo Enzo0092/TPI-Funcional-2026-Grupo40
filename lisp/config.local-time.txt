@@ -69,6 +69,65 @@
 	(floor (/(* minutos 60) (duracion-ciclo 90 6 120)))
 )
 
+
+(defun distribucion-hora-n (t-rojo t-amarillo t-verde n)
+  (let* ((t-int 3) ; Tiempo fijo de intermitencia solicitado
+         ; El ciclo ahora incluye dinámicamente las tres intermitencias (total 225)
+         (ciclo (duracion-ciclo t-rojo t-amarillo t-verde))
+         (inicio (* (1- n) 3600))   ; segundo inicial de la hora N
+         (offset (mod inicio ciclo))    ; aca se determina en qué punto del ciclo arranca la hora 
+         (resto-inicial (- ciclo offset)))
+    
+    ; aca se calculan los segundos de la hora N
+    (let* ((primera (cond
+                      ((<= 3600 resto-inicial)
+                       ; toda la hora entra en el ciclo actual
+                       (list (min 3600 t-rojo)
+                             (min (max 0 (- 3600 t-rojo)) t-int)
+                             (min (max 0 (- 3600 (+ t-rojo t-int))) t-verde)
+                             (min (max 0 (- 3600 (+ t-rojo t-int t-verde))) t-int)
+                             (min (max 0 (- 3600 (+ t-rojo t-int t-verde t-int))) t-amarillo)
+                             (max 0 (- 3600 (+ t-rojo t-int t-verde t-int t-amarillo)))))
+                      (t
+                       ; aca se completa el ciclo en curso
+                       (list (min resto-inicial t-rojo)
+                             (min (max 0 (- resto-inicial t-rojo)) t-int)
+                             (min (max 0 (- resto-inicial (+ t-rojo t-int))) t-verde)
+                             (min (max 0 (- resto-inicial (+ t-rojo t-int t-verde))) t-int)
+                             (min (max 0 (- resto-inicial (+ t-rojo t-int t-verde t-int))) t-amarillo)
+                             (max 0 (- resto-inicial (+ t-rojo t-int t-verde t-int t-amarillo)))))))
+           
+           (restante (- 3600 (reduce #'+ primera)))   ; estos son los segundos que quedan de la hora después de cerrar ese ciclo
+           (ciclos-completos (floor (/ restante ciclo)))
+           (tiempo-ciclos (* ciclos-completos ciclo))
+           
+           ; tiempos acumulados por color e intermitencia en ciclos completos
+           (rojo-base (+ (nth 0 primera) (* ciclos-completos t-rojo)))
+           (int-r-base (+ (nth 1 primera) (* ciclos-completos t-int)))
+           (verde-base (+ (nth 2 primera) (* ciclos-completos t-verde)))
+           (int-v-base (+ (nth 3 primera) (* ciclos-completos t-int)))
+           (amarillo-base (+ (nth 4 primera) (* ciclos-completos t-amarillo)))
+           (int-y-base (+ (nth 5 primera) (* ciclos-completos t-int)))
+           
+           (sobrante (- restante tiempo-ciclos))
+           
+           ; aca se reparten los segundos sobrantes del último ciclo parcial
+           (final (list (min sobrante t-rojo)   
+                        (min (max 0 (- sobrante t-rojo)) t-int)
+                        (min (max 0 (- sobrante (+ t-rojo t-int))) t-verde)
+                        (min (max 0 (- sobrante (+ t-rojo t-int t-verde))) t-int)
+                        (min (max 0 (- sobrante (+ t-rojo t-int t-verde t-int))) t-amarillo)
+                        (max 0 (- sobrante (+ t-rojo t-int t-verde t-int t-amarillo))))))
+      
+      ; aca se devuelven los porcentajes de las 6 fases combinadas
+      (mapcar (lambda (x) (* 100 (/ x 3600.0)))
+              (list (+ rojo-base (nth 0 final))
+                    (+ int-r-base (nth 1 final))
+                    (+ verde-base (nth 2 final))
+                    (+ int-v-base (nth 3 final))
+                    (+ amarillo-base (nth 4 final))
+                    (+ int-y-base (nth 5 final)))))))
+
 ;=============
 ;Iteracion 2
 ;=============

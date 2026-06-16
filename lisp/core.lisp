@@ -85,6 +85,7 @@ Requerimiento 3:
   ;Suma los tiempos de las tres fases para obtener el ciclo completo (rojo -> verde -> amarillo )
   (+ t-rojo t-verde t-amarillo))
 
+
 ;4b. Función recomendacion-ciclo:
 ;; ========================================================
 ;; FUNCIÓN: recomendacion-ciclo
@@ -125,6 +126,7 @@ Requerimiento 3:
   ;    asegurando que solo se devuelva la cantidad de ciclos COMPLETOS.
   (floor (/ (* minutos 60) (duracion-ciclo 90 6 120)))
 )
+
 
 ;opcion 2 sacando el resto
 
