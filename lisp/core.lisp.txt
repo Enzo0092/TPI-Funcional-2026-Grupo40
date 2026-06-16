@@ -127,13 +127,12 @@ el CADR de la lista y arma ya el resultado que se espera
   (let* ((ciclo (duracion-ciclo t-rojo t-amarillo t-verde))
          (ciclos-completos (floor (/ 3600 ciclo)))
          (tiempo-completo (* ciclos-completos ciclo))
-         (resto (- 3600 tiempo-completo))
-         ;; tiempos acumulados por color en ciclos completos
-         (rojo-base (* ciclos-completos t-rojo))
+         (resto (- 3600 tiempo-completo)) 
+         (rojo-base (* ciclos-completos t-rojo)) 	;; tiempos acumulados por color en ciclos completos
          (amarillo-base (* ciclos-completos t-amarillo))
          (verde-base (* ciclos-completos t-verde)))
-    ;; calculamos los tiempos finales sin mutar variables
-    (let ((rojo-final (cond
+    
+    (let ((rojo-final (cond 	   ;; aca se calculan los tiempos finales sin modificar variables
                         ((<= resto t-rojo) (+ rojo-base resto))
                         ((> resto t-rojo) (+ rojo-base t-rojo))
                         (t rojo-base)))
@@ -144,8 +143,7 @@ el CADR de la lista y arma ya el resultado que se espera
                             (t (+ amarillo-base t-amarillo))))
           (verde-final (cond
                          ((<= resto (+ t-rojo t-amarillo)) verde-base)
-                         (t (+ verde-base (- resto (+ t-rojo t-amarillo)))))))
-      ;; devolvemos porcentajes
-      (mapcar (lambda (x) (* 100 (/ x 3600.0)))
+                         (t (+ verde-base (- resto (+ t-rojo t-amarillo))))))) 
+      (mapcar (lambda (x) (* 100 (/ x 3600.0))) 	;; aca se devuelven los porcentajes
               (list rojo-final amarillo-final verde-final)))))
 
