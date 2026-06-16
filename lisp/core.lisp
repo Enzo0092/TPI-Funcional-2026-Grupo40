@@ -1,5 +1,4 @@
 ;Requerimiento 1:
-;Requerimiento 1:
 
 ;; ========================================================
 ;; FUNCIÓN: transicion
@@ -38,28 +37,28 @@
 
 
 ;Requerimiento 3:
-;Requerimiento 3:
+
 ;; ========================================================
-;; FUNCIÓN: transicion
+;; FUNCIÓN: CambiodColor
 ;; NATURALEZA: Pura (siempre devuelve el mismo resultado para los mismos parametros)
 ;; ESTRATEGIA: Condicional (por su uso del cond)
 ;; IMPACTO: No destructiva
 ;; ========================================================
 
-(defun transicion (color-actual cambiar-a) (let ((r 'rojo) (y 'amarillo) (g 'verde)) 
+(defun CambiodColor (color-actual cambiar-a) (let ((r 'rojo) (y 'amarillo) (g 'verde)) 
 						(cond 
 						((and (eq color-actual r) (eq cambiar-a 'verde)) (list color-actual cambiar-a));Uso cond para abarcar los 3 casos de cambio de color del semaforo
 						((and (eq color-actual y) (eq cambiar-a 'rojo)) (list color-actual cambiar-a))
 						((and (eq color-actual g) (eq cambiar-a 'amarillo)) (list color-actual cambiar-a)))));Utilizo el requerimiento 1 para hacer este requerimiento
 
 ;; ========================================================
-;; FUNCIÓN: timer
+;; FUNCIÓN: contador
 ;; NATURALEZA: Pura (depende unicamente del parametro time)
 ;; ESTRATEGIA: Expresion aritmetica y condicional
 ;; IMPACTO: No destructiva
 ;; ========================================================
 
-(defun timer (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (transicion 'rojo 'verde)) 
+(defun contador (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (transicion 'rojo 'verde)) 
 			((< t-color 210) (transicion 'verde 'amarillo)) (t (transicion 'amarillo 'rojo)))));Tambien, utilizo el requerimiento 2
 
 ;; ========================================================
@@ -69,7 +68,7 @@
 ;; IMPACTO: No destructiva
 ;; ========================================================
 
-(defun logging (tiempo) (let ((color-anterior (car (timer tiempo))) (color-actual (cadr (timer tiempo))));Una vez que recibe la lista, guarda el CAR y el CADR de la lista y arma ya el resultado que se espera
+(defun logging (tiempo) (let ((color-anterior (car (contador tiempo))) (color-actual (cadr (contador tiempo))));Una vez que recibe la lista, guarda el CAR y el CADR de la lista y arma ya el resultado que se espera
 (format nil "Tiempo ~D: la luz cambio de ~A a ~A" tiempo color-anterior color-actual)))
 
 
