@@ -1,4 +1,4 @@
-Requerimiento 1:
+;Requerimiento 1:
 
 ;; ========================================================
 ;; FUNCIÓN: transicion
@@ -36,7 +36,7 @@ Requerimiento 1:
 				)))
 
 
-Requerimiento 3:
+;Requerimiento 3:
 ;; ========================================================
 ;; FUNCIÓN: transicion
 ;; NATURALEZA: Pura (siempre devuelve el mismo resultado para los mismos parametros)
@@ -188,3 +188,111 @@ Requerimiento 3:
                     (+ amarillo-base (second final))
                     (+ verde-base (third final)))))))
 	;; los porcentajes de la primera, segunda y tercer hora varian y luego se repiten cadda tres horas.
+
+
+
+
+;Requerimiento 7
+
+ ";; --- PRUEBAS REQUERIMIENTO 1 (transicion) ---
+
+; 1. Camino Normal (Flujo correcto: Verde a Amarillo)
+(transicion 'en-verde 'amarillo)
+; Devuelve: (EN-VERDE "cambiar a AMARILLO")
+
+; 2. Camino Alternativo / Estado Inválido (Transición prohibida o fuera de secuencia)
+(transicion 'en-rojo 'amarillo)
+; Devuelve: NIL
+
+; 3. Ejemplo que Genera Error (Olvidar la comilla simple en un símbolo evalúa una variable inexistente)
+(transicion en-rojo 'amarillo)
+; Provoca error: "unbound variable - EN-ROJO"
+
+
+;; --- PRUEBAS REQUERIMIENTO 2 (timer) ---
+
+; 1. Camino Normal (Tiempo en fase Verde: 100 segundos)
+(timer 100)
+; Devuelve: VERDE 
+
+; 2. Camino Alternativo (Exactamente en el límite de cambio de fase: 90 segundos)
+(timer 89)
+; Devuelve: Rojo
+
+; 3. Camino Alternativo (pasando el límite de verde)
+(timer 215)
+; Devuelve: Amarillo
+
+; 4. Ejemplo que Genera Error (Pasar un parámetro de tipo incorrecto como un string)
+(timer "100")
+; Provoca error: Error: bad argument type - "100"
+
+;; --- PRUEBAS REQUERIMIENTO 3 (logging) ---
+
+; 1. Camino Normal (Tiempo: 100 segundos)
+(logging 100)
+; Devuelve: "Tiempo 100: la luz cambio de VERDE a AMARILLO"
+
+;2. Camino Alternativo (Exactamente en el límite de cambio de fase: 90 segundos)
+(logging 89)
+; Devuelve: "Tiempo 89: la luz cambio de ROJO a VERDE"
+
+;3. Camino Alternativo
+(logging 215)
+"Tiempo 215: la luz cambio de AMARILLO a ROJO"
+
+; 4. Ejemplo que Genera Error (Pasar un parámetro de tipo incorrecto como un string)
+(logging "100")
+; Provoca error: Error: bad argument type - "100"
+
+;; --- PRUEBAS REQUERIMIENTO 4 (duracion-ciclo y recomendacion-ciclo) ---
+
+; 1. Camino Normal / Rango Perfecto (Ciclo estándar equilibrado: 40s + 40s + 10s = 90s)
+(duracion-ciclo 40 40 10)
+;Devuelve: 90
+(recomendacion-ciclo (duracion-ciclo 40 40 10))
+; Devuelve: "El ciclo es perfecto"
+
+; 2. Camino Alternativo A (Ciclo excesivamente largo: 90s + 120s + 6s = 216s)
+(duracion-ciclo 90 120 6)
+;Devuelve: 216
+(recomendacion-ciclo (duracion-ciclo 90 120 6))
+; Devuelve: "El ciclo es muy largo"
+
+; 3. Camino Alternativo B (Ciclo excesivamente corto: 10s + 10s + 5s = 25s)
+(duracion-ciclo 10 10 5)
+;Devuelve: 25
+(recomendacion-ciclo (duracion-ciclo 10 10 5))
+; Devuelve: "El ciclo es muy corto"
+
+; 4. Ejemplo que Genera Error (Pasar un número de parámetros incorrecto a duracion-ciclo)
+(duracion-ciclo 90 120)
+; Provoca: Error: too few arguments
+
+;; --- PRUEBAS REQUERIMIENTO 5 (ciclos-por-tiempo) ---
+
+; 1. Camino Normal (15 minutos de observación en el ciclo base de 216s)
+(ciclos-por-tiempo 15)
+; Devuelve: 4 (Opc 1 devuelve 4 y el residuo 16 como valores múltiples; Opc 2 devuelve solo 4)
+
+; 2. Camino Alternativo (0 minutos de simulación)
+(ciclos-por-tiempo 0)
+; Devuelve: 0
+
+; 3. Ejemplo que Genera Error (Pasar un valor flotante negativo o nulo que rompa la lógica discreta)
+(ciclos-por-tiempo nil)
+; Provoca: Error: bad argument type - NIL, al intentar multiplicar por 60
+
+;; --- PRUEBAS REQUERIMIENTO 6 (distribucion-hora-n) ---
+
+; 1. Camino Normal (Distribución exacta para la primera hora con tiempos estándar)
+(distribucion-hora-n 90 6 120 1)
+; Devuelve una lista con los 3 porcentajes correspondientes a la Hora 1: (41.666668 2.7777778 55.555557)
+
+; 2. Camino Alternativo (Evaluar el comportamiento asincrónico en la Hora 2)
+(distribucion-hora-n 90 6 120 2)
+; Devuelve la lista con la distorsión del hachazo temporal de la Hora 2: (41.38889 2.7777778 55.833332)
+
+; 3. Ejemplo que Genera Error (Pasar un número de hora N menor o igual a 0)
+(distribucion-hora-n 90 6 120 0)
+; Provoca error de dominio matemático al ejecutar (1- 0) dando una multiplicación inválida para el tiempo inicial"
