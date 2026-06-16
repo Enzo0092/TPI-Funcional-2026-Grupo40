@@ -1,4 +1,5 @@
 ;Requerimiento 1:
+;Requerimiento 1:
 
 ;; ========================================================
 ;; FUNCIÓN: transicion
@@ -36,6 +37,7 @@
 				)))
 
 
+;Requerimiento 3:
 ;Requerimiento 3:
 ;; ========================================================
 ;; FUNCIÓN: transicion
