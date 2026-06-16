@@ -82,7 +82,7 @@ Requerimiento 3:
 ;; ========================================================
 
 (defun duracion-ciclo (t-rojo t-verde t-amarillo)
-  ;Suma los tiempos de las tres fases para obtener el ciclo completo (rojo -> amarillo -> verde)
+  ;Suma los tiempos de las tres fases para obtener el ciclo completo (rojo -> verde -> amarillo )
   (+ t-rojo t-verde t-amarillo))
 
 ;4b. Función recomendacion-ciclo:
