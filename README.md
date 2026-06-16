@@ -1,3 +1,4 @@
+![Portada del TP](docs/portada.jpeg)
 ---Sistema de Semáforos Inteligentes---
 
 Trabajo Práctico Integrador 2026
