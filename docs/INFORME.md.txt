@@ -37,6 +37,7 @@ no devuelva lo esperado:
 La funcion fue sobreescrita debido a que, como las variables del let ya recibian listas con valores con 2 estados diferentes sin acciones (como "cambiar a rojo"),
 me di cuenta que podia simplemente imprimir directamente el resultado ya que las funciones: timer y transicion (en una version donde timer llama a transicion enviandole valores)
 nunca iba a dar un resultado erroneo.
+
 5) Durante el desarrollo de la fase 3 escribiendo las funciones de lisp a scala editamos el codigo de lisp ya hecho, cambiando la salida por default ya que en esa salida devolvemos 
 un string [(t "Estado invalido")] y no una lista lo que puede ocasionar inconsistencias en el desarrollo de las funciones en scala, el codigo corregido quedaria : [(t nil)]
 
@@ -61,6 +62,18 @@ No utilizamos una clase tradicional porque no se requiere modelar objetos con id
 object = módulo/contenedor de funciones puras
 class = objetos con estado
 case class = modelar datos
+
+ 8)Durante el desarrollo de las funciones "duracion-ciclo" y "recomendacion-ciclo", el equipo se enfrentó a los siguientes problemas enfocado al paradigma funcional:
+ Uno de los primeros retos fue que la información de los tiempos de tráfico fluyera a través de los argumentos, respetando la inmutabilidad absoluta requerida.
+ Existia la tentacion de almacenar el resultado de la suma de "duracion-ciclo" e una variable global. Se resolvio la problematica, mediante la composicion funcional, 
+ logrando que la salida aritmética de la duración de los semaforos alimente de forma directa y transparente al bloque condicional de "recomendacion-ciclo".
+
+ 9) En el desarrollo de "duracion-ciclo", para la suma de las fases arrojaba un total de 216 seegundos. Al considerar la incorporación de la iteración 1(intermitencias de seguridad),
+ surgió la dificultad de evitar "hardcodear" constantes (como un +9 directo) dentro del código. Optamos por explicar la suma de los intervalos de 3 segundos.
+ Esto evitó la presencia de números mágicos sin contexto y garantizo que la función siguiera siendo No Destructiva.
+
+
+Respuesta a preguntas sobre SCALA:
 2)Comparen la manipulación de listas en Scala (métodos como .map o .filter) contra
 las funciones de orden superior de Common Lisp. ¿Cuál resulta más legible y por qué?
 Respuesta:
@@ -73,14 +86,4 @@ Sin embargo, Common Lisp mantiene una sintaxis más uniforme, ya que todo se exp
 
 En conclusión, ambas formas son funcionalmente equivalentes, pero para este trabajo consideramos más legible la sintaxis de Scala en operaciones simples sobre listas,
  mientras que Common Lisp resulta más consistente desde el punto de vista del paradigma funcional puro.
-
- 8)Durante el desarrollo de las funciones "duracion-ciclo" y "recomendacion-ciclo", el equipo se enfrentó a los siguientes problemas enfocado al paradigma funcional:
- Uno de los primeros retos fue que la información de los tiempos de tráfico fluyera a través de los argumentos, respetando la inmutabilidad absoluta requerida.
- Existia la tentacion de almacenar el resultado de la suma de "duracion-ciclo" e una variable global. Se resolvio la problematica, mediante la composicion funcional, 
- logrando que la salida aritmética de la duración de los semaforos alimente de forma directa y transparente al bloque condicional de "recomendacion-ciclo".
-
- 9) En el desarrollo de "duracion-ciclo", para la suma de las fases arrojaba un total de 216 seegundos. Al considerar la incorporación de la iteración 1(intermitencias de seguridad),
- surgió la dificultad de evitar "hardcodear" constantes (como un +9 directo) dentro del código. Optamos por explicar la suma de los intervalos de 3 segundos.
- Esto evitó la presencia de números mágicos sin contexto y garantizo que la función siguiera siendo No Destructiva.
-
  
