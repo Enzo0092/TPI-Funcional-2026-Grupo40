@@ -1,4 +1,7 @@
-![Portada del TP](docs/portada.jpeg)
+<p align="center">
+  <img src="docs/portada.jpeg" width="600" alt="Portada del TP">
+</p>
+
 ---Sistema de Semáforos Inteligentes---
 
 Trabajo Práctico Integrador 2026
