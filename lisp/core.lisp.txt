@@ -109,12 +109,38 @@ Requerimiento 3:
 ;Requerimiento 5:
 
 ;opcion 1 sin sacar el resto
+
+;; ========================================================
+;; FUNCIÓN: ciclos-por-tiempo
+;; NATURALEZA: Pura (Dado un tiempo en minutos, calcula de forma determinista los ciclos completos sin efectos secundarios)
+;; ESTRATEGIA: Composición Aritmética y Truncamiento
+;; IMPACTO: No destructiva (No modifica estructuras; devuelve un número entero nuevo)
+;; ========================================================
+
 (defun ciclos-por-tiempo (minutos)
+  ; 1. Convertimos los minutos recibidos por parámetro a segundos multiplicándolos por 60.
+  ; 2. Llamamos a 'duracion-ciclo' pasándole los tiempos puros de la Fase 1 (90, 6, 120), que suman 216s.
+  ; 3. Dividimos el tiempo total en segundos por la duración del ciclo básico.
+  ; 4. La función 'floor' trunca el resultado hacia abajo (descarta los decimales),
+  ;    asegurando que solo se devuelva la cantidad de ciclos COMPLETOS.
   (floor (/ (* minutos 60) (duracion-ciclo 90 6 120)))
 )
 
 ;opcion 2 sacando el resto
+
+;; ========================================================
+;; FUNCIÓN: ciclos-por-tiempo
+;; NATURALEZA: Pura (Calcula la cantidad de ciclos completos basándose únicamente en el parámetro de entrada)
+;; ESTRATEGIA: Composición Aritmética / Extracción de Valores Múltiples (nth-value)
+;; IMPACTO: No destructiva (Retorna un valor numérico atómico sin alterar el entorno)
+;; ========================================================
+
 (defun ciclos-por-tiempo (minutos)
+  ; 1. Convertimos los minutos de entrada a segundos (* minutos 60).
+  ; 2. Dividimos por la duración calculada del ciclo puro de Fase 1 (216 segundos).
+  ; 3. La función primitiva 'floor' realiza la división y genera dos salidas en paralelo: (cociente-entero resto-en-segundos).
+  ; 4. 'nth-value 0' interviene para capturar únicamente el valor de la posición cero (el cociente),
+  ;    descartando el residuo para cumplir estrictamente con la especificación de ciclos completos.
   (nth-value 0 (floor (/ (* minutos 60) (duracion-ciclo 90 6 120))))
 )
 
