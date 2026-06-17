@@ -139,16 +139,16 @@
    (format stream "Informe de Ejecución del Sistema Semafórico~%")
    (format stream "=========================================~%")
 	
-(let ((fecha (local-time:format-timestring nil (local-time:unix-to-timestamp tiempo))) (color-anterior (car (timer tiempo))) (color-actual (cadr (timer tiempo))))
+(let ((fecha (local-time:format-timestring nil (local-time:unix-to-timestamp tiempo))) (color-anterior (car (timer2 tiempo))) (color-actual (cadr (timer2 tiempo))))
 	
 (format stream "~A: la luz cambio de ~A a ~A" fecha color-anterior color-actual))
 (format stream "~% --- Fin del Informe ---")))
 
-(defun transicion (color-actual cambiar-a) (let ((r 'rojo) (y 'amarillo) (g 'verde)) 
+(defun transicion2 (color-actual cambiar-a) (let ((r 'rojo) (y 'amarillo) (g 'verde)) 
 						(cond 
 						((and (eq color-actual r) (eq cambiar-a 'verde)) (list color-actual cambiar-a))
 						((and (eq color-actual y) (eq cambiar-a 'rojo)) (list color-actual cambiar-a))
 						((and (eq color-actual g) (eq cambiar-a 'amarillo)) (list color-actual cambiar-a)))))
 
-(defun timer (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (transicion 'rojo 'verde)) 
-			((< t-color 210) (transicion 'verde 'amarillo)) (t (transicion 'amarillo 'rojo)))))
+(defun timer2 (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (transicion2 'rojo 'verde)) 
+			((< t-color 210) (transicion2 'verde 'amarillo)) (t (transicion2 'amarillo 'rojo)))))
