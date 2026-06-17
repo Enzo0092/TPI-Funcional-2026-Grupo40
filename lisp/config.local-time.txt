@@ -145,11 +145,11 @@
    (format stream "=========================================~%")
 	
 (let ((fecha (local-time:format-timestring
-            nil (local-time:unix-to-timestamp tiempo) :format '((:year 4) "-" (:month 2) "-" (:day 2) " " (:hour 2) ":" (:min 2)))) 
+            nil (local-time:unix-to-timestamp tiempo) :format '((:year 4) "-" (:month 2) "-" (:day 2) " " (:hour 2) ":" (:minute 2)))) 
 
 (color-anterior (car (timer2 tiempo))) (color-actual (cadr (timer2 tiempo))))
 	
-(format stream "~A: la luz cambio de ~A a ~A" fecha color-anterior color-actual))
+(format stream "~A: la luz cambio de ~A a ~A~%" fecha color-anterior color-actual))
 (format stream "~% --- Fin del Informe ---"))))
 
 (defun transicion2 (color-actual cambiar-a) (let ((r 'rojo) (y 'amarillo) (g 'verde)) 
