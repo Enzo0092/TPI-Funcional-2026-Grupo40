@@ -14,7 +14,7 @@
 
 (color-anterior (car (contador tiempo)))
 (color-actual (cadr (contador tiempo)))) 
-(format nil "~A: la luz cambio de ~A a ~A" fecha color-anterior color-actual)));Una vez que recibe la lista, guarda el CAR y el CADR de la lista y arma ya el resultado que se espera
+(format nil "~A: la luz cambio de ~A a ~A" fecha color-anterior color-actual);Una vez que recibe la lista, guarda el CAR y el CADR de la lista y arma ya el resultado que se espera
 (format nil "~A: la luz cambio de ~A a ~A" fecha color-anterior color-actual)));En esta funcion, guardo lo que devuelve local-time en una variable local, en este caso lo va a guardar entre comillas ("2026-05-16 14:30")
 
 ;===========
@@ -150,7 +150,7 @@
 (color-anterior (car (timer2 tiempo))) (color-actual (cadr (timer2 tiempo))))
 	
 (format stream "~A: la luz cambio de ~A a ~A~%" fecha color-anterior color-actual))
-(format stream "~% --- Fin del Informe ---"))))
+(format stream "~% --- Fin del Informe ---")))
 
 (defun transicion2 (color-actual cambiar-a) (let ((r 'rojo) (y 'amarillo) (g 'verde)) 
 						(cond 
