@@ -58,8 +58,8 @@
 ;; IMPACTO: No destructiva
 ;; ========================================================
 
-(defun contador (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (transicion 'rojo 'verde)) 
-			((< t-color 210) (transicion 'verde 'amarillo)) (t (transicion 'amarillo 'rojo)))));Tambien, utilizo el requerimiento 2
+(defun contador (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (CambiodColor 'rojo 'verde)) 
+			((< t-color 210) (CambiodColor 'verde 'amarillo)) (t (CambiodColor 'amarillo 'rojo)))));Tambien, utilizo el requerimiento 2
 
 ;; ========================================================
 ;; FUNCIÓN: logging
