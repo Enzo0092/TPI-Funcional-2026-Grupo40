@@ -9,8 +9,13 @@
 (defun contador (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (CambiodColor 'rojo 'verde)) 
 			((< t-color 210) (CambiodColor 'verde 'amarillo)) (t (CambiodColor 'amarillo 'rojo)))));Tambien, utilizo el requerimiento 2
 
-(defun logging (tiempo) (let ((fecha (local-time:format-timestring nil (local-time:unix-to-timestamp tiempo))) (color-anterior (car (contador tiempo))) (color-actual (cadr (contador tiempo))));Una vez que recibe la lista, guarda el CAR y el CADR de la lista y arma ya el resultado que se espera
-(format nil "~A: la luz cambio de ~A a ~A" fecha color-anterior color-actual)));En esta funcion, guardo lo que devuelve local-time en una variable local, en este caso lo va a guardar entre comillas ("1970-01-15T06:15:31.000000Z")
+(defun logging (tiempo) (let ((fecha (local-time:format-timestring
+            nil (local-time:unix-to-timestamp tiempo) :format '((:year 4) "-" (:month 2) "-" (:day 2) " " (:hour 2) ":" (:min 2))))
+
+(color-anterior (car (contador tiempo)))
+(color-actual (cadr (contador tiempo)))) 
+(format nil "~A: la luz cambio de ~A a ~A" fecha color-anterior color-actual)));Una vez que recibe la lista, guarda el CAR y el CADR de la lista y arma ya el resultado que se espera
+(format nil "~A: la luz cambio de ~A a ~A" fecha color-anterior color-actual)));En esta funcion, guardo lo que devuelve local-time en una variable local, en este caso lo va a guardar entre comillas ("2026-05-16 14:30")
 
 ;===========
 ;Iteración 1
@@ -139,10 +144,13 @@
    (format stream "Informe de Ejecución del Sistema Semafórico~%")
    (format stream "=========================================~%")
 	
-(let ((fecha (local-time:format-timestring nil (local-time:unix-to-timestamp tiempo))) (color-anterior (car (timer2 tiempo))) (color-actual (cadr (timer2 tiempo))))
+(let ((fecha (local-time:format-timestring
+            nil (local-time:unix-to-timestamp tiempo) :format '((:year 4) "-" (:month 2) "-" (:day 2) " " (:hour 2) ":" (:min 2)))) 
+
+(color-anterior (car (timer2 tiempo))) (color-actual (cadr (timer2 tiempo))))
 	
 (format stream "~A: la luz cambio de ~A a ~A" fecha color-anterior color-actual))
-(format stream "~% --- Fin del Informe ---")))
+(format stream "~% --- Fin del Informe ---"))))
 
 (defun transicion2 (color-actual cambiar-a) (let ((r 'rojo) (y 'amarillo) (g 'verde)) 
 						(cond 
