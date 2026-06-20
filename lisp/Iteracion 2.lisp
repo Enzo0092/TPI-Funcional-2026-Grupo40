@@ -1,21 +1,3 @@
-;Utilizando la librerria local-time, modifique el requerimiento 3 para poder dejar como la consigna de la fase 2 pedia:
-
-(defun transicion (color-actual cambiar-a) (let ((r 'rojo) (y 'amarillo) (g 'verde)) 
-						(cond 
-						((and (eq color-actual r) (eq cambiar-a 'verde)) (list color-actual cambiar-a));Uso cond para abarcar los 3 casos de cambio de color del semaforo
-						((and (eq color-actual y) (eq cambiar-a 'rojo)) (list color-actual cambiar-a))
-						((and (eq color-actual g) (eq cambiar-a 'amarillo)) (list color-actual cambiar-a)))));Utilizo el requerimiento 1 para hacer este requerimiento
-
-(defun timer (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (transicion 'rojo 'verde)) 
-			((< t-color 210) (transicion 'verde 'amarillo)) (t (transicion 'amarillo 'rojo)))));Tambien, utilizo el requerimiento 2
-
-(defun logging (tiempo) (let ((fecha (local-time:format-timestring
-            nil (local-time:unix-to-timestamp tiempo) :format '((:year 4) "-" (:month 2) "-" (:day 2) " " (:hour 2) ":" (:min 2))))
-
-(color-anterior (car (timer tiempo)))
-(color-actual (cadr (timer tiempo)))) 
-(format nil "~A: la luz cambio de ~A a ~A" fecha color-anterior color-actual);Una vez que recibe la lista, guarda el CAR y el CADR de la lista y arma ya el resultado que se espera
-(format nil "~A: la luz cambio de ~A a ~A" fecha color-anterior color-actual)));En esta funcion, guardo lo que devuelve local-time en una variable local, en este caso lo va a guardar entre comillas ("2026-05-16 14:30")
 
 ;===========
 ;Iteración 1
@@ -37,6 +19,7 @@
 		((and (eq color-actual 'amarillo-intermitente)(eq cambiar-a r))(list color-actual (format nil "cambiar a ~A" cambiar-a)))
 		;Caso por defecto ante una transicion inválida o fuera de secuencia
 		(t NIL))))
+
 
 
 (defun timer (time) 
@@ -139,24 +122,8 @@
 
 ;Persistencia de datos
 
-(defun informe (tiempo)
- (with-open-file (stream "informe-ejecucion-semaforo.txt" :direction :output)
-   (format stream "Informe de Ejecución del Sistema Semafórico~%")
-   (format stream "=========================================~%")
-	
-(let ((fecha (local-time:format-timestring
-            nil (local-time:unix-to-timestamp tiempo) :format '((:year 4) "-" (:month 2) "-" (:day 2) " " (:hour 2) ":" (:minute 2)))) 
+(defun informe (tiempo) (with-open-file (stream "informe-ejecucion-semaforo.txt" :direction :output) (format stream "Informe de Ejecución del Sistema Semafórico~%") (format stream "=========================================~%") (let ((fecha (local-time:format-timestring nil (local-time:unix-to-timestamp tiempo) :format '((:year 4) "-" (:month 2) "-" (:day 2) " " (:hour 2) ":" (:min 2)))) (color-anterior (car (timer2 tiempo))) (color-actual (cadr (timer2 tiempo)))) (format stream "~A: la luz cambio de ~A a ~A~%" fecha color-anterior color-actual)) (format stream "~% --- Fin del Informe ---")))
 
-(color-anterior (car (timer2 tiempo))) (color-actual (cadr (timer2 tiempo))))
-	
-(format stream "~A: la luz cambio de ~A a ~A~%" fecha color-anterior color-actual))
-(format stream "~% --- Fin del Informe ---")))
+(defun transicion2 (color-actual cambiar-a) (let ((r 'rojo) (y 'amarillo) (g 'verde)) (cond ((and (eq color-actual r) (eq cambiar-a 'verde)) (list color-actual cambiar-a)) ((and (eq color-actual y) (eq cambiar-a 'rojo)) (list color-actual cambiar-a)) ((and (eq color-actual g) (eq cambiar-a 'amarillo)) (list color-actual cambiar-a)))))
 
-(defun transicion2 (color-actual cambiar-a) (let ((r 'rojo) (y 'amarillo) (g 'verde)) 
-						(cond 
-						((and (eq color-actual r) (eq cambiar-a 'verde)) (list color-actual cambiar-a))
-						((and (eq color-actual y) (eq cambiar-a 'rojo)) (list color-actual cambiar-a))
-						((and (eq color-actual g) (eq cambiar-a 'amarillo)) (list color-actual cambiar-a)))))
-
-(defun timer2 (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (transicion2 'rojo 'verde)) 
-			((< t-color 210) (transicion2 'verde 'amarillo)) (t (transicion2 'amarillo 'rojo)))))
+(defun timer2 (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (transicion2 'rojo 'verde)) ((< t-color 210) (transicion2 'verde 'amarillo)) (t (transicion2 'amarillo 'rojo)))))
