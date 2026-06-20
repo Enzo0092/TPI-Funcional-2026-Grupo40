@@ -39,13 +39,13 @@
 ;Requerimiento 3:
 
 ;; ========================================================
-;; FUNCIÓN: CambiodColor
+;; FUNCIÓN: obtener-transicion
 ;; NATURALEZA: Pura (siempre devuelve el mismo resultado para los mismos parametros)
 ;; ESTRATEGIA: Condicional (por su uso del cond)
 ;; IMPACTO: No destructiva
 ;; ========================================================
 
-(defun CambiodColor (color-actual cambiar-a) (let ((r 'rojo) (y 'amarillo) (g 'verde)) 
+(defun obtener-transicion (color-actual cambiar-a) (let ((r 'rojo) (y 'amarillo) (g 'verde)) 
 						(cond 
 						((and (eq color-actual r) (eq cambiar-a 'verde)) (list color-actual cambiar-a));Uso cond para abarcar los 3 casos de cambio de color del semaforo
 						((and (eq color-actual y) (eq cambiar-a 'rojo)) (list color-actual cambiar-a))
@@ -58,8 +58,8 @@
 ;; IMPACTO: No destructiva
 ;; ========================================================
 
-(defun contador (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (CambiodColor 'rojo 'verde)) 
-			((< t-color 210) (CambiodColor 'verde 'amarillo)) (t (CambiodColor 'amarillo 'rojo)))));Tambien, utilizo el requerimiento 2
+(defun contador (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (obtener-transicion 'rojo 'verde)) 
+			((< t-color 210) (obtener-transicion 'verde 'amarillo)) (t (obtener-transicion 'amarillo 'rojo)))));Tambien, utilizo el requerimiento 2
 
 ;; ========================================================
 ;; FUNCIÓN: logging
