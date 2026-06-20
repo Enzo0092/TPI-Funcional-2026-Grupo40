@@ -122,8 +122,29 @@
 
 ;Persistencia de datos
 
-(defun informe (tiempo) (with-open-file (stream "informe-ejecucion-semaforo.txt" :direction :output) (format stream "Informe de Ejecución del Sistema Semafórico~%") (format stream "=========================================~%") (let ((fecha (local-time:format-timestring nil (local-time:unix-to-timestamp tiempo) :format '((:year 4) "-" (:month 2) "-" (:day 2) " " (:hour 2) ":" (:min 2)))) (color-anterior (car (timer2 tiempo))) (color-actual (cadr (timer2 tiempo)))) (format stream "~A: la luz cambio de ~A a ~A~%" fecha color-anterior color-actual)) (format stream "~% --- Fin del Informe ---")))
+;; ========================================================
+;; FUNCIÓN: informe
+;; NATURALEZA: Pura (siempre devuelve el mismo resultado para los mismos parametros)
+;; ESTRATEGIA: Guardado de datos devueltos a un archivo de texto plano
+;; IMPACTO: Destructiva (Destruye el archivo de texto plano anterior)
+;; ========================================================
 
-(defun transicion2 (color-actual cambiar-a) (let ((r 'rojo) (y 'amarillo) (g 'verde)) (cond ((and (eq color-actual r) (eq cambiar-a 'verde)) (list color-actual cambiar-a)) ((and (eq color-actual y) (eq cambiar-a 'rojo)) (list color-actual cambiar-a)) ((and (eq color-actual g) (eq cambiar-a 'amarillo)) (list color-actual cambiar-a)))))
+(defun informe (tiempo) (with-open-file (stream "informe-ejecucion-semaforo.txt" :direction :output) (format stream "Informe de Ejecución del Sistema Semafórico~%") (format stream "=========================================~%") (let ((fecha (local-time:format-timestring nil (local-time:unix-to-timestamp tiempo) :format '((:year 4) "-" (:month 2) "-" (:day 2) " " (:hour 2) ":" (:min 2)))) (color-anterior (car (contador tiempo))) (color-actual (cadr (contador tiempo)))) (format stream "~A: la luz cambio de ~A a ~A~%" fecha color-anterior color-actual)) (format stream "~% --- Fin del Informe ---")))
 
-(defun timer2 (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (transicion2 'rojo 'verde)) ((< t-color 210) (transicion2 'verde 'amarillo)) (t (transicion2 'amarillo 'rojo)))))
+;; ========================================================
+;; FUNCIÓN: obtener-transicion
+;; NATURALEZA: Pura (siempre devuelve el mismo resultado para los mismos parametros)
+;; ESTRATEGIA: Condicional
+;; IMPACTO: No destructiva
+;; ========================================================
+
+(defun obtener-transicion (color-actual cambiar-a) (let ((r 'rojo) (y 'amarillo) (g 'verde)) (cond ((and (eq color-actual r) (eq cambiar-a 'verde)) (list color-actual cambiar-a)) ((and (eq color-actual y) (eq cambiar-a 'rojo)) (list color-actual cambiar-a)) ((and (eq color-actual g) (eq cambiar-a 'amarillo)) (list color-actual cambiar-a)))))
+
+;; ========================================================
+;; FUNCIÓN: contador
+;; NATURALEZA: Pura (depende unicamente del parametro time)
+;; ESTRATEGIA: Expresion aritmetica y condicional
+;; IMPACTO: No destructiva
+;; ========================================================
+
+(defun contador (time) (let ((t-color (mod time 216))) (cond ((< t-color 90) (obtener-transicion 'rojo 'verde)) ((< t-color 210) (obtener-transicion 'verde 'amarillo)) (t (obtener-transicion 'amarillo 'rojo)))))
