@@ -1,14 +1,16 @@
 # Código de Honor y Declaración de Autoría
 
 Cada integrante debe completar individualmente su sección.
-Integrante :Enzo Romero - Usuario GitHub: Enzo0092
-1.Codigo en Common Lisp (Fase 1 y 2 )
+
+  Integrante: Enzo Romero - Usuario GitHub: Enzo0092
+1. Código en Common Lisp (Fase 1 y 2 )
 ● [] Desarrollo 100% Humano: El código fue diseñado, escrito y depurado puramente por mí/el
 grupo sin intervención de IA.
 ● [X] Asistencia de IA (Co-piloto): Utilicé IA como un tutor o documentación dinámica (búsqueda
 de errores sintácticos, explicación de funciones primitivas), pero la lógica y clasificación del
 semáforo fue estructurada por el grupo.
 ● [ ] Generación Completa por IA: Un modelo de IA 
+
 2. Código del Lenguaje Asignado (Fase 3)
 ● [ ] Desarrollo 100% Humano: Aprendí la sintaxis básica, clasifiqué sus componentes y escribí la
 solución de forma autónoma.
@@ -16,25 +18,28 @@ solución de forma autónoma.
 errores del compilador ajeno.
 ● [ ] Generación Completa por IA: La IA realizó la traducción automática de las funciones
 transición y timer.
+
 3. Redacción del Informe y Respuestas Teóricas
 ● [X] Autoría Propia: Las explicaciones de los conceptos de los lenguajes y el análisis comparativo
 reflejan nuestras propias conclusiones conceptuales.
 ● [ ] Redacción Asistida / Generada: La IA redactó o fundamentó las respuestas teóricas basadas
 en prompts conceptuales proporcionados por el grupo.
 ● [ ] Generación completa por IA
+
 Declaración Jurada: Al subir este archivo al repositorio, declaro bajo compromiso de honor
 que las marcas anteriores reflejan fielmente mi participación y la naturaleza del desarrollo de
 este trabajo práctico. Entiendo que la cátedra cruzará esta declaración con la correcta
 clasificación en comentarios del código y con mi desempeño en la defensa oral/video.
 
-Integrante :Gaston Vera - Usuario GitHub: XxGastuxX
-1.Codigo en Common Lisp (Fase 1 y 2 )
+  Integrante: Gaston Vera - Usuario GitHub: XxGastuxX
+1. Código en Common Lisp (Fase 1 y 2 )
 ● [] Desarrollo 100% Humano: El código fue diseñado, escrito y depurado puramente por mí/el
 grupo sin intervención de IA.
 ● [X] Asistencia de IA (Co-piloto): Utilicé IA como un tutor o documentación dinámica (búsqueda
 de errores sintácticos, explicación de funciones primitivas), pero la lógica y clasificación del
 semáforo fue estructurada por el grupo.
 ● [ ] Generación Completa por IA: Un modelo de IA 
+
 2. Código del Lenguaje Asignado (Fase 3)
 ● [ ] Desarrollo 100% Humano: Aprendí la sintaxis básica, clasifiqué sus componentes y escribí la
 solución de forma autónoma.
@@ -42,25 +47,28 @@ solución de forma autónoma.
 errores del compilador ajeno.
 ● [ ] Generación Completa por IA: La IA realizó la traducción automática de las funciones
 transición y timer.
+
 3. Redacción del Informe y Respuestas Teóricas
 ● [X] Autoría Propia: Las explicaciones de los conceptos de los lenguajes y el análisis comparativo
 reflejan nuestras propias conclusiones conceptuales.
 ● [ ] Redacción Asistida / Generada: La IA redactó o fundamentó las respuestas teóricas basadas
 en prompts conceptuales proporcionados por el grupo.
 ● [ ] Generación completa por IA
+
 Declaración Jurada: Al subir este archivo al repositorio, declaro bajo compromiso de honor
 que las marcas anteriores reflejan fielmente mi participación y la naturaleza del desarrollo de
 este trabajo práctico integrador. Entiendo que la cátedra cruzará esta declaración con la correcta
 clasificación en comentarios del código y con mi desempeño en la defensa oral/video.
 
-Integrante : Nahuel Federico Soto - Usuario GitHub: NahuelFS9
-1.Codigo en Common Lisp (Fase 1 y 2 )
+Integrante: Nahuel Federico Soto - Usuario GitHub: NahuelFS9
+1. Código en Common Lisp (Fase 1 y 2 )
 ● [] Desarrollo 100% Humano: El código fue diseñado, escrito y depurado puramente por mí/el
 grupo sin intervención de IA.
 ● [X] Asistencia de IA (Co-piloto): Utilicé IA como un tutor o documentación dinámica (búsqueda
 de errores sintácticos, explicación de funciones primitivas), pero la lógica y clasificación del
 semáforo fue estructurada por el grupo.
 ● [ ] Generación Completa por IA: Un modelo de IA 
+
 2. Código del Lenguaje Asignado (Fase 3)
 ● [ ] Desarrollo 100% Humano: Aprendí la sintaxis básica, clasifiqué sus componentes y escribí la
 solución de forma autónoma.
@@ -68,25 +76,28 @@ solución de forma autónoma.
 errores del compilador ajeno.
 ● [ ] Generación Completa por IA: La IA realizó la traducción automática de las funciones
 transición y timer.
+
 3. Redacción del Informe y Respuestas Teóricas
 ● [X] Autoría Propia: Las explicaciones de los conceptos de los lenguajes y el análisis comparativo
 reflejan nuestras propias conclusiones conceptuales.
 ● [ ] Redacción Asistida / Generada: La IA redactó o fundamentó las respuestas teóricas basadas
 en prompts conceptuales proporcionados por el grupo.
 ● [ ] Generación completa por IA
+
 Declaración Jurada: Al subir este archivo al repositorio, declaro bajo compromiso de honor
 que las marcas anteriores reflejan fielmente mi participación y la naturaleza del desarrollo de
 este trabajo práctico integrador. Entiendo que la cátedra cruzará esta declaración con la correcta
 clasificación en comentarios del código y con mi desempeño en la defensa oral/video.
 
-Integrante :Guido Sebastian Fernandez Casado - Usuario GitHub:Guidof12
-1.Codigo en Common Lisp (Fase 1 y 2 )
+Integrante: Guido Sebastian Fernandez Casado - Usuario GitHub: Guidof12
+1. Código en Common Lisp (Fase 1 y 2 )
 ● [] Desarrollo 100% Humano: El código fue diseñado, escrito y depurado puramente por mí/el
 grupo sin intervención de IA.
 ● [X] Asistencia de IA (Co-piloto): Utilicé IA como un tutor o documentación dinámica (búsqueda
 de errores sintácticos, explicación de funciones primitivas), pero la lógica y clasificación del
 semáforo fue estructurada por el grupo.
 ● [ ] Generación Completa por IA: Un modelo de IA 
+
 2. Código del Lenguaje Asignado (Fase 3)
 ● [ ] Desarrollo 100% Humano: Aprendí la sintaxis básica, clasifiqué sus componentes y escribí la
 solución de forma autónoma.
@@ -94,26 +105,29 @@ solución de forma autónoma.
 errores del compilador ajeno.
 ● [ ] Generación Completa por IA: La IA realizó la traducción automática de las funciones
 transición y timer.
+
 3. Redacción del Informe y Respuestas Teóricas
 ● [X] Autoría Propia: Las explicaciones de los conceptos de los lenguajes y el análisis comparativo
 reflejan nuestras propias conclusiones conceptuales.
 ● [ ] Redacción Asistida / Generada: La IA redactó o fundamentó las respuestas teóricas basadas
 en prompts conceptuales proporcionados por el grupo.
 ● [ ] Generación completa por IA
+
 Declaración Jurada: Al subir este archivo al repositorio, declaro bajo compromiso de honor
 que las marcas anteriores reflejan fielmente mi participación y la naturaleza del desarrollo de
 este trabajo práctico. Entiendo que la cátedra cruzará esta declaración con la correcta
 clasificación en comentarios del código y con mi desempeño en la defensa oral/video.
 
 
-Integrante : Scher Emily Giuliana - Usuario GitHub: EmilyGiulianaScher
-1.Codigo en Common Lisp (Fase 1 y 2 )
+Integrante: Scher Emily Giuliana - Usuario GitHub: EmilyGiulianaScher
+1. Código en Common Lisp (Fase 1 y 2 )
 ● [] Desarrollo 100% Humano: El código fue diseñado, escrito y depurado puramente por mí/el
 grupo sin intervención de IA.
 ● [X] Asistencia de IA (Co-piloto): Utilicé IA como un tutor o documentación dinámica (búsqueda
 de errores sintácticos, explicación de funciones primitivas), pero la lógica y clasificación del
 semáforo fue estructurada por el grupo.
 ● [ ] Generación Completa por IA: Un modelo de IA 
+
 2. Código del Lenguaje Asignado (Fase 3)
 ● [ ] Desarrollo 100% Humano: Aprendí la sintaxis básica, clasifiqué sus componentes y escribí la
 solución de forma autónoma.
@@ -121,12 +135,14 @@ solución de forma autónoma.
 errores del compilador ajeno.
 ● [ ] Generación Completa por IA: La IA realizó la traducción automática de las funciones
 transición y timer.
+
 3. Redacción del Informe y Respuestas Teóricas
 ● [X] Autoría Propia: Las explicaciones de los conceptos de los lenguajes y el análisis comparativo
 reflejan nuestras propias conclusiones conceptuales.
 ● [ ] Redacción Asistida / Generada: La IA redactó o fundamentó las respuestas teóricas basadas
 en prompts conceptuales proporcionados por el grupo.
 ● [ ] Generación completa por IA
+
 Declaración Jurada: Al subir este archivo al repositorio, declaro bajo compromiso de honor
 que las marcas anteriores reflejan fielmente mi participación y la naturaleza del desarrollo de
 este trabajo práctico. Entiendo que la cátedra cruzará esta declaración con la correcta
