@@ -1,9 +1,16 @@
 
 ;===========
-;Iteración 1
+;Extensión 1
 ;===========
 
 ;Intermitencia de Seguridad
+
+;; ========================================================
+;; REQUERIMIENTO 1 : transicion (Versión 2.1)
+;; NATURALEZA: Pura (Siempre devuelve el mismo resultado para los mismos parámetros)
+;; ESTRATEGIA: Condicional / Evaluación de Predicados
+;; IMPACTO: No destructiva
+;; ========================================================
 
 (defun transicion (color-actual cambiar-a) 
 	(let ((r 'en-rojo) (y 'en-amarillo) (g 'en-verde))
@@ -21,6 +28,12 @@
 		(t NIL))))
 
 
+;; ========================================================
+;; REQUERIMIENTO 2 : timer (Versión 2.1)
+;; NATURALEZA: Pura (Depende únicamente del parámetro time)
+;; ESTRATEGIA: Expresión Aritmética Modular y Condicional
+;; IMPACTO: No destructiva
+;; ========================================================
 
 (defun timer (time) 
 	(let ((t-color (mod time 225))) ;el ciclo total ahora dura 225 segundos
@@ -32,15 +45,36 @@
 			((< t-color 222) (transicion 'en-amarillo 'amarillo-intermitente)) ;de 216 a 221: Cambia a amarillo intermitente
 			(t (transicion 'amarillo-intermitente 'en-rojo))))) ;de 222 a 224: Cambia a Rojo
 
+;; ========================================================
+;; REQUERIMIENTO 3: logging (Versión 2.1)
+;; NATURALEZA: Pura (Devuelve una cadena estructurada con format nil)
+;; ESTRATEGIA: Formateo de cadenas y composición de funciones
+;; IMPACTO: No destructiva
+;; ========================================================
+
 (defun logging (tiempo)
 	(let ((color-anterior (car (timer tiempo)))
 			(color-actual (cadr (timer tiempo))))
 	(format nil "Tiempo ~D: la luz ha cambiado de ~A a ~A" tiempo color-anterior color-actual)
 ))
 
+;; ========================================================
+;; REQUERIMIENTO 4a: duracion-ciclo (Versión 2.1)
+;; NATURALEZA: Pura (Calcula la duración total sumando fases e intermitencias fijas de 3s)
+;; ESTRATEGIA: Expresión Aritmética
+;; IMPACTO: No destructiva
+;; ========================================================
+
 (defun duracion-ciclo (t-rojo t-amarillo t-verde)
 ;Se le suma 3 segundos de intermitencia por cada una de las 3 fases (en total 9 segundos extras)
 (+ t-rojo t-amarillo t-verde 3 3 3))
+
+;; ========================================================
+;; REQUERIMIENTO 4b: recomendacion-ciclo (Versión 2.1)
+;; NATURALEZA: Pura (Evalúa de forma determinista basándose en criterios de tráfico)
+;; ESTRATEGIA: Composición Condicional y evaluación de predicados
+;; IMPACTO: No destructiva
+;; ========================================================
 
 (defun recomendacion-ciclo (duracion-ciclo)
 	(cond
@@ -51,12 +85,25 @@
 
 )
 
+;; ========================================================
+;; REQUERIMIENTO 5: ciclos-por-tiempo (Versión 2.1)
+;; NATURALEZA: Pura (Calcula los ciclos completos basándose en la nueva duración con intermitencia)
+;; ESTRATEGIA: Composición Aritmética / Truncamiento
+;; IMPACTO: No destructiva
+;; ========================================================
+
 (defun ciclos-por-tiempo (minutos)
 ;Como usamos la funcion duracion-ciclo pasándole los parámetros base (90 6 120)
 ;La función internamente sumará la intermitencia dando 225
 	(floor (/(* minutos 60) (duracion-ciclo 90 6 120)))
 )
 
+;; ========================================================
+;; REQUERIMIENTO 6: distribucion-por-hora (Versión 2.1)
+;; NATURALEZA: Pura (Depende solo de parámetros de tiempo)
+;; ESTRATEGIA: Composición aritmética avanzada y condicionales anidados
+;; IMPACTO: No destructiva
+;; ========================================================
 
 (defun distribucion-hora-n (t-rojo t-amarillo t-verde n)
   (let* ((t-int 3) ; Tiempo fijo de intermitencia solicitado
@@ -117,7 +164,7 @@
                     (+ int-y-base (nth 5 final)))))))
 
 ;=============
-;Iteracion 2
+;Extensión 2
 ;=============
 
 ;Persistencia de datos
